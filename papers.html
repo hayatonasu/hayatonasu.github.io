@@ -39,7 +39,7 @@
 
     <h1>Research papers</h1>
 
-    <div id="container-pub"></div>
+    <div id="container-pub"><p id="zotero-loading" style="color:#888;font-style:italic;">Loading publications from Zotero&hellip; (this may take a moment)</p></div>
 
             </div>
         </div>
@@ -77,6 +77,8 @@ window.addEventListener("resize", function() {
                 });
                 var container = document.getElementById('container-pub');
                 zp.render(data, container).then(function() {
+                    var loading = document.getElementById('zotero-loading');
+                    if (loading) loading.remove();
                     data.raw.forEach(function(item) {
                         var el = container.querySelector('[data-item="' + item.key + '"]');
                         if (item.data.itemType === 'thesis') {

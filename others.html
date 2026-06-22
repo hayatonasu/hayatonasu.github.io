@@ -40,7 +40,7 @@
         <h1>Others</h1>
         <h2 class="w3-large"><b><i class="fa fa-book-open fa-fw w3-margin-right" style="color:#42602D;"></i>Notes</b></h2>
 
-        <div id="container"></div>
+        <div id="container"><p id="zotero-loading" style="color:#888;font-style:italic;">Loading notes from Zotero&hellip; (this may take a moment)</p></div>
 
         <p>For other notes written in Japanese: <a href="notejapanese.html">Notes in Japanese</a></p>
 
@@ -65,6 +65,8 @@
 
             var container = document.getElementById('container');
             zp.render(data, container).then(function() {
+                var loading = document.getElementById('zotero-loading');
+                if (loading) loading.remove();
                 data.raw.forEach(function(item) {
                     var el = container.querySelector('[data-item="' + item.key + '"]');
                     if (!el) return;

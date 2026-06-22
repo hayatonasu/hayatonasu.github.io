@@ -39,7 +39,7 @@
 
     <h1>Research Talks</h1>
 
-    <div id="container-pres"></div>
+    <div id="container-pres"><p id="zotero-loading" style="color:#888;font-style:italic;">Loading talks from Zotero&hellip; (this may take a moment)</p></div>
 
             </div>
         </div>
@@ -56,6 +56,8 @@
                 });
                 var container = document.getElementById('container-pres');
                 zp.render(data, container).then(function() {
+                    var loading = document.getElementById('zotero-loading');
+                    if (loading) loading.remove();
                     data.raw.forEach(function(item) {
                         var el = container.querySelector('[data-item="' + item.key + '"]');
                         if (!el) return;

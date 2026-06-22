@@ -39,7 +39,7 @@
 
     <h1>Notes in Japanese</h1>
 
-    <div id="container"><p id="zotero-loading" style="color:#888;font-style:italic;">Loading notes from Zotero&hellip; (this may take a moment)</p></div>
+    <div id="container"><p id="zotero-loading" style="font-size:1.1em;">Loading&hellip;</p></div>
 
             </div>
         </div>
@@ -56,6 +56,8 @@
         var promise = zp.getPublications(10978498);
 
         promise.then(function(data) {
+            var loading = document.getElementById('zotero-loading');
+            if (loading) loading.remove();
             data.raw = data.data = data.raw.filter(function(item) {
                 return item.data.itemType === 'document';
             });

@@ -7,17 +7,7 @@ p {font-family: "Helvetica Neue", sans-serif}
     z-index: 100;
     background-color: #42602D;
     box-shadow: 0 2px 6px rgba(0,0,0,0.18);
-    padding: 0.5em 1em 0.4em;
-}
-
-.site-nav-brand {
-    display: inline-block;
-    font-weight: bold;
-    font-size: 1.15em;
-    letter-spacing: 0.02em;
-    color: #fff;
-    text-decoration: none;
-    margin-bottom: 0.35em;
+    padding: 0.5em 1em;
 }
 
 .site-nav-tabs {
@@ -119,33 +109,21 @@ p {font-family: "Helvetica Neue", sans-serif}
     line-height: 1.6;
 }
 
-/* Zotero Publications overrides */
-.zotero-item-authors {
+/* Paper/talk/note list-entry cards (papers.html, talks.html,
+   others.html, notejapanese.html, and their individual item pages) */
+.entry-authors {
     color: #555;
     font-size: 0.85em;
     margin: 0.1em 0;
 }
 
-.zotero-item-location {
+.entry-meta {
     color: #555;
     font-size: 0.85em;
     margin: 0.1em 0;
 }
 
-.zotero-publications {
-    font-family: "Helvetica Neue", sans-serif;
-}
-
-.zotero-publications a {
-    color: #42602D;
-    text-decoration: none;
-}
-
-.zotero-publications a:hover {
-    text-decoration: underline;
-}
-
-.zotero-item-title {
+.entry-title {
     display: block;
     color: #42602D;
     font-size: 1em;
@@ -154,47 +132,52 @@ p {font-family: "Helvetica Neue", sans-serif}
     margin: 0 0 0.1em;
 }
 
-.zotero-item-title a {
+.entry-title a {
     color: #42602D;
 }
 
-.zotero-group-title {
+.entry-group-title {
     font-size: 1.4em;
     font-weight: bold;
     color: #42602D;
     margin: 0.8em 0 0.4em;
 }
 
-.zotero-pdf-btn {
+.entry-pdf-btn {
     margin-left: 0.5em;
     vertical-align: middle;
 }
 
-.zotero-url-link {
-    margin-left: 0.5em;
-    vertical-align: middle;
-    color: #42602D;
+/* Site-wide external/internal link colors: external (leaves the site)
+   is enji, internal (stays on hayatonasu.github.io) is green — PDF
+   buttons stay green since the file is hosted here. Usable inline in
+   prose as-is; add .link-btn alongside for the icon-button spacing
+   used in paper/talk/note item sublines. */
+.link-external {
+    color: #8C4247;
     text-decoration: none;
-    font-size: 0.9em;
 }
 
-.zotero-url-link:hover {
+.link-external:hover {
     text-decoration: underline;
 }
 
-.zotero-arxiv-btn {
-    margin-left: 0.5em;
-    vertical-align: middle;
+.link-internal {
     color: #42602D;
     text-decoration: none;
-    font-size: 0.9em;
 }
 
-.zotero-arxiv-btn:hover {
+.link-internal:hover {
     text-decoration: underline;
 }
 
-.zotero-item {
+.link-btn {
+    margin-left: 0.5em;
+    vertical-align: middle;
+    font-size: 0.9em;
+}
+
+.entry {
     border-left: 3px solid #42602D;
     padding: 0.5em 0.8em;
     background-color: #ffffff;
@@ -203,16 +186,11 @@ p {font-family: "Helvetica Neue", sans-serif}
     scroll-margin-top: 80px;
 }
 
-body:not(.publication-page) .zotero-details,
-body:not(.publication-page) .zotero-item-actions {
+.entry-hidden {
     display: none;
 }
 
-.zotero-item-hidden {
-    display: none;
-}
-
-.show-all .zotero-item-hidden {
+.show-all .entry-hidden {
     display: list-item;
 }
 
@@ -235,22 +213,11 @@ body:not(.publication-page) .zotero-item-actions {
     color: #fff;
 }
 
-.zotero-item-extra {
-    color: #555;
-    font-size: 0.88em;
-    margin-left: 0.6em;
-}
-
-.zotero-item-featured {
+.entry-featured {
     border-left: 4px solid #42602D;
 }
 
-.zotero-featured-badge {
-    color: #42602D;
-}
-
-
-.zotero-item-toggles {
+.entry-toggles {
     display: flex;
     gap: 1.2em;
     margin-top: 0.4em;
@@ -258,11 +225,11 @@ body:not(.publication-page) .zotero-item-actions {
     padding-top: 0.3em;
 }
 
-.zotero-item-abstract-details {
+.entry-details {
     margin-top: 0;
 }
 
-.zotero-item-abstract-toggle {
+.entry-details-toggle {
     font-size: 0.8em;
     color: #42602D;
     cursor: pointer;
@@ -279,45 +246,21 @@ body:not(.publication-page) .zotero-item-actions {
     margin-right: 0.4em;
 }
 
-.zotero-item-abstract-toggle::-webkit-details-marker { display: none; }
+.entry-details-toggle::-webkit-details-marker { display: none; }
 
-.zotero-item-abstract-toggle::before {
+.entry-details-toggle::before {
     content: '▶';
     font-size: 0.7em;
     transition: transform 0.15s;
 }
 
-.zotero-item-abstract-details[open] > .zotero-item-abstract-toggle::before {
+.entry-details[open] > .entry-details-toggle::before {
     transform: rotate(90deg);
 }
 
-.zotero-item-abstract {
+.entry-details-body {
     margin-top: 0.5em;
     font-size: 0.88em;
     color: #444;
     line-height: 1.5;
-}
-
-.zotero-line {
-    display: none;
-}
-
-.zotero-btn {
-    border-color: #42602D;
-    color: #42602D;
-}
-
-.zotero-btn:hover,
-.zotero-btn:focus {
-    background-color: #42602D;
-    border-color: #42602D;
-    color: #fff;
-}
-
-.zotero-tab-active {
-    border-bottom: 2px solid #42602D;
-}
-
-.zotero-tab-active a {
-    color: #42602D;
 }

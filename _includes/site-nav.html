@@ -1,13 +1,14 @@
 {% comment %}
-Shared nav bar: brand name on its own row, tabs wrapping on a row below.
-Pass which tab is current via `active`: papers | talks | blog | others | notejapanese.
+Shared nav bar: just the tabs row now — no brand name (the Home tab
+covers that job, and repeating the name on every page was redundant).
+Pass which tab is current via `active`: home | papers | talks | blog | others | notejapanese.
 The Blog tab is intentionally omitted (semi-confidential for now) — the
 `blog` value for `active` is still accepted so post.html doesn't break,
 it just won't visibly highlight anything.
 {% endcomment %}
 <nav class="site-nav">
-    <a href="{{ '/' | relative_url }}" class="site-nav-brand">Hayato Nasu</a>
     <div class="site-nav-tabs">
+        <a href="{{ '/' | relative_url }}"{% if include.active == "home" %} class="site-nav-active"{% endif %}>Home</a>
         <a href="{{ '/papers.html' | relative_url }}"{% if include.active == "papers" %} class="site-nav-active"{% endif %}>Research Papers</a>
         <a href="{{ '/talks.html' | relative_url }}"{% if include.active == "talks" %} class="site-nav-active"{% endif %}>Research Talks</a>
         <a href="{{ '/others.html' | relative_url }}"{% if include.active == "others" %} class="site-nav-active"{% endif %}>Others</a>

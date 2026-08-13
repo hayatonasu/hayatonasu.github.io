@@ -31,13 +31,13 @@
 
                     <h1 style="color:#42602D;"><b>{{ page.title }}</b></h1>
 
-                    <div class="zotero-item-location">
+                    <div class="entry-meta">
                         {% if page.date %}{{ page.date | date: "%B %-d, %Y" }}{% endif %}{% if page.extra %} &mdash; {{ page.extra }}{% endif %}
                     </div>
 
                     <p>
-                        {% if page.pdf %}<a href="{{ page.pdf | relative_url }}" rel="nofollow" class="w3-button w3-green w3-round-large w3-small zotero-pdf-btn"><i class="fa fa-download"></i> PDF</a>{% endif %}
-                        {% if page.link %}<a href="{{ page.link }}" target="_blank" rel="noopener noreferrer" class="zotero-url-link"><i class="fa fa-external-link"></i> Link</a>{% endif %}
+                        {% if page.pdf %}<a href="{{ page.pdf | relative_url }}" rel="nofollow" class="w3-button w3-green w3-round-large w3-small entry-pdf-btn"><i class="fa fa-download"></i> PDF</a>{% endif %}
+                        {% if page.link %}<a href="{{ page.link }}" target="_blank" rel="noopener noreferrer" class="link-external link-btn"><i class="fa fa-external-link"></i> Link</a>{% endif %}
                     </p>
 
                     {% if page.tags and page.tags.size > 0 %}
@@ -55,10 +55,7 @@
         </div>
     </div>
 
-<footer class="site-footer">
-    <span>Hayato Nasu &mdash; PhD student, <a href="https://www.dal.ca/">Dalhousie University</a> &nbsp;&middot;&nbsp; <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
-    <span class="site-footer-copy">&copy; Hayato Nasu</span>
-</footer>
+{% include site-footer.html %}
 
 
     </body>

@@ -1,7 +1,7 @@
 ---
 layout: talk
 title: "Relative Simplicity via clans"
-meeting_name: "33rd Foundational Methods in Computer Science Workshop"
+meeting_name: "FMCS 2026"
 place: "Antigonish, Nova Scotia"
 date: 2026-07-16
 link: https://dariendewolf.com/fmcs2026/

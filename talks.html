@@ -29,36 +29,36 @@ permalink: /talks.html
     {% for talk in talks %}
         {% unless talk.featured %}{% assign has_nonfeatured = true %}{% endunless %}
         {% assign talk_slug = talk.url | split: '/' | last %}
-        <li class="zotero-item{% unless talk.featured %} zotero-item-hidden{% endunless %}{% if talk.featured %} zotero-item-featured{% endif %}" id="{{ talk_slug }}">
-            <div class="zotero-item-header-container">
-                <div class="zotero-item-header">
+        <li class="entry{% unless talk.featured %} entry-hidden{% endunless %}{% if talk.featured %} entry-featured{% endif %}" id="{{ talk_slug }}">
+            <div class="entry-header-row">
+                <div class="entry-header">
                     {% comment %}
                     standalone: false skips linking to this item's own
                     /talks/:path/ page — title is plain text; use the
                     PDF/Link buttons below instead — see README.
                     {% endcomment %}
                     {% if talk.standalone == false %}
-                        <h3 class="zotero-item-title">{{ talk.title }}</h3>
+                        <h3 class="entry-title">{{ talk.title }}</h3>
                     {% else %}
-                        <h3 class="zotero-item-title"><a href="{{ talk.url | relative_url }}">{{ talk.title }}</a></h3>
+                        <h3 class="entry-title"><a href="{{ talk.url | relative_url }}">{{ talk.title }}</a></h3>
                     {% endif %}
-                    <div class="zotero-item-subline">
+                    <div class="entry-subline">
                         {% if talk.meeting_name %}{{ talk.meeting_name }}{% endif %}
-                        {% if talk.pdf %}<a href="{{ talk.pdf | relative_url }}" rel="nofollow" class="w3-button w3-green w3-round-large w3-small zotero-pdf-btn"><i class="fa fa-download"></i> PDF</a>{% endif %}
-                        {% if talk.link %}<a href="{{ talk.link }}" target="_blank" rel="noopener noreferrer" class="w3-button w3-blue w3-round-large w3-small zotero-pdf-btn">{% if talk.link contains "youtube.com" or talk.link contains "youtu.be" %}<i class="fa-brands fa-youtube"></i> YouTube{% else %}<i class="fa fa-link"></i> Link{% endif %}</a>{% endif %}
+                        {% if talk.pdf %}<a href="{{ talk.pdf | relative_url }}" rel="nofollow" class="w3-button w3-green w3-round-large w3-small entry-pdf-btn"><i class="fa fa-download"></i> PDF</a>{% endif %}
+                        {% if talk.link %}<a href="{{ talk.link }}" target="_blank" rel="noopener noreferrer" class="link-external link-btn">{% if talk.link contains "youtube.com" or talk.link contains "youtu.be" %}<i class="fa-brands fa-youtube"></i> YouTube{% else %}<i class="fa fa-link"></i> Link{% endif %}</a>{% endif %}
                         {% if talk.paper %}
                             {% assign related_paper = site.papers | where: "url", talk.paper | first %}
                             {% if related_paper %}
-                                <a href="{{ related_paper.url | relative_url }}" class="zotero-url-link"><i class="fa fa-file-text"></i> Paper</a>
+                                <a href="{{ related_paper.url | relative_url }}" class="link-internal link-btn"><i class="fa fa-file-text"></i> Related paper</a>
                             {% endif %}
                         {% endif %}
                     </div>
                     {% assign talk_content_stripped = talk.content | strip_html | strip %}
                     {% if talk_content_stripped != "" %}
-                        <div class="zotero-item-toggles">
-                            <details class="zotero-item-abstract-details">
-                                <summary class="zotero-item-abstract-toggle">Abstract</summary>
-                                <div class="zotero-item-abstract">{{ talk.content }}</div>
+                        <div class="entry-toggles">
+                            <details class="entry-details">
+                                <summary class="entry-details-toggle">Abstract</summary>
+                                <div class="entry-details-body">{{ talk.content }}</div>
                             </details>
                         </div>
                     {% endif %}
@@ -75,10 +75,7 @@ permalink: /talks.html
         </div>
     </div>
 
-<footer class="site-footer">
-    <span>Hayato Nasu &mdash; PhD student, <a href="https://www.dal.ca/">Dalhousie University</a> &nbsp;&middot;&nbsp; <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
-    <span class="site-footer-copy">&copy; Hayato Nasu</span>
-</footer>
+{% include site-footer.html %}
 
     <script>
 (function() {
@@ -97,7 +94,7 @@ permalink: /talks.html
     // and the browser's native anchor scroll does nothing.
     if (location.hash) {
         var target = document.getElementById(location.hash.slice(1));
-        if (target && target.classList.contains('zotero-item-hidden')) {
+        if (target && target.classList.contains('entry-hidden')) {
             setShowingAll(true);
             target.scrollIntoView();
         }

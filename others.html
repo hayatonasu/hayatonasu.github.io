@@ -28,18 +28,18 @@ permalink: /others.html
         {% assign notes = site.notes | sort: "date" | reverse %}
         <ul style="list-style:none; padding-left:0; margin:0;">
         {% for note in notes %}
-            <li class="zotero-item">
-                <div class="zotero-item-header-container">
-                    <div class="zotero-item-header">
+            <li class="entry">
+                <div class="entry-header-row">
+                    <div class="entry-header">
                         {% if note.standalone == false %}
-                            <h3 class="zotero-item-title">{{ note.title }}</h3>
+                            <h3 class="entry-title">{{ note.title }}</h3>
                         {% else %}
-                            <h3 class="zotero-item-title"><a href="{{ note.url | relative_url }}">{{ note.title }}</a></h3>
+                            <h3 class="entry-title"><a href="{{ note.url | relative_url }}">{{ note.title }}</a></h3>
                         {% endif %}
-                        <div class="zotero-item-subline">
+                        <div class="entry-subline">
                             {% if note.date %}{{ note.date | date: "%B %-d, %Y" }}{% endif %}{% if note.extra %} &mdash; {{ note.extra }}{% endif %}
-                            {% if note.pdf %}<a href="{{ note.pdf | relative_url }}" rel="nofollow" class="w3-button w3-green w3-round-large w3-small zotero-pdf-btn"><i class="fa fa-download"></i> PDF</a>{% endif %}
-                            {% if note.link %}<a href="{{ note.link }}" target="_blank" rel="noopener noreferrer" class="zotero-url-link"><i class="fa fa-external-link"></i> Link</a>{% endif %}
+                            {% if note.pdf %}<a href="{{ note.pdf | relative_url }}" rel="nofollow" class="w3-button w3-green w3-round-large w3-small entry-pdf-btn"><i class="fa fa-download"></i> PDF</a>{% endif %}
+                            {% if note.link %}<a href="{{ note.link }}" target="_blank" rel="noopener noreferrer" class="link-external link-btn"><i class="fa fa-external-link"></i> Link</a>{% endif %}
                         </div>
                         {% if note.tags and note.tags.size > 0 %}
                             <div>{% for tag in note.tags %}<span class="w3-tag w3-small site-tag">{{ tag }}</span>{% endfor %}</div>
@@ -56,10 +56,7 @@ permalink: /others.html
         </div>
     </div>
 
-<footer class="site-footer">
-    <span>Hayato Nasu &mdash; PhD student, <a href="https://www.dal.ca/">Dalhousie University</a> &nbsp;&middot;&nbsp; <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
-    <span class="site-footer-copy">&copy; Hayato Nasu</span>
-</footer>
+{% include site-footer.html %}
 
     </body>
 </html>

@@ -1,0 +1,65 @@
+{% assign is_ja = false %}
+{% if page.collection == "notes_ja" %}{% assign is_ja = true %}{% endif %}
+<!DOCTYPE html>
+<html lang="{% if is_ja %}ja{% else %}en{% endif %}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 | default: page.title }}">
+        <title>{{ page.title }} &middot; Hayato Nasu</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+        <link rel="stylesheet" href="{{ '/fonts/academicons-1.9.4/css/academicons.min.css' | relative_url }}"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link href="{{ '/style.css' | relative_url }}" rel="stylesheet" type="text/css" media="all">
+
+        {% include math-head.html %}
+    </head>
+    <body class="w3-light-grey">
+
+    {% if is_ja %}{% include site-nav.html active="notejapanese" %}{% else %}{% include site-nav.html active="others" %}{% endif %}
+
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+        <div class="w3-container">
+            <div id="main" class="w3-white w3-row-padding w3-margin-top" style="margin-left:3%;">
+                <div class="w3-container">
+
+                    {% if is_ja %}
+                        <p><a href="{{ '/notejapanese.html' | relative_url }}">&larr; ノート一覧に戻る</a></p>
+                    {% else %}
+                        <p><a href="{{ '/others.html' | relative_url }}">&larr; Back to Others</a></p>
+                    {% endif %}
+
+                    <h1 style="color:#42602D;"><b>{{ page.title }}</b></h1>
+
+                    <div class="zotero-item-location">
+                        {% if page.date %}{{ page.date | date: "%B %-d, %Y" }}{% endif %}{% if page.extra %} &mdash; {{ page.extra }}{% endif %}
+                    </div>
+
+                    <p>
+                        {% if page.pdf %}<a href="{{ page.pdf | relative_url }}" rel="nofollow" class="w3-button w3-green w3-round-large w3-small zotero-pdf-btn"><i class="fa fa-download"></i> PDF</a>{% endif %}
+                        {% if page.link %}<a href="{{ page.link }}" target="_blank" rel="noopener noreferrer" class="zotero-url-link"><i class="fa fa-external-link"></i> Link</a>{% endif %}
+                    </p>
+
+                    {% if page.tags and page.tags.size > 0 %}
+                        <p>{% for tag in page.tags %}<span class="w3-tag w3-small site-tag">{{ tag }}</span>{% endfor %}</p>
+                    {% endif %}
+
+                    <div id="latex-preamble" style="display:none"></div>
+
+                    <div class="post-content" style="line-height:1.7; margin-top:1.5em;">
+                        {{ content }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer class="site-footer">
+    <span>Hayato Nasu &mdash; PhD student, <a href="https://www.dal.ca/">Dalhousie University</a> &nbsp;&middot;&nbsp; <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
+    <span class="site-footer-copy">&copy; Hayato Nasu</span>
+</footer>
+
+
+    </body>
+</html>

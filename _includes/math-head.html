@@ -1,0 +1,151 @@
+{% comment %}
+Shared <head> setup for any layout that renders Markdown content with math,
+Obsidian-style callouts, and/or TikZ diagrams (post.html, paper.html,
+talk.html). Expects the rendered body to live inside an element with class
+"post-content", and a hidden `<div id="latex-preamble"></div>` somewhere in
+the page for the preamble.sty macros to be loaded into.
+
+TikZJax renders ```tikz fenced code blocks the same way Obsidian's TikZJax
+plugin does — it's the same underlying library, not an Obsidian-specific
+thing. It scans the page for <script type="text/tikz"> elements, so
+kramdown's plain <pre><code class="language-tikz"> output gets converted
+into that format by JS below, once the DOM is ready.
+{% endcomment %}
+<link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+<script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
+<script>
+window.MathJax = {
+    startup: {
+        // Held off until the preamble.sty macros (fetched below) are
+        // in place, so \newcommand definitions from it are available
+        // to every $...$/$$...$$ in the page from the first render.
+        typeset: false
+    },
+    tex: {
+        // Both delimiter styles work in source: kramdown rewrites
+        // $$...$$ to \(...\)/\[...\] before this ever reaches the
+        // browser, and bare $...$ passes through kramdown untouched,
+        // so MathJax has to be told to recognize it directly.
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    chtml: {
+        matchFontHeight: false
+    },
+    svg: {
+        fontCache: 'global'
+    }
+};
+</script>
+<script>
+// Obsidian-style callouts ("> [!Theorem] Title ...") survive as
+// plain <blockquote><p>[!Theorem] Title\n...</p></blockquote> after
+// kramdown, since kramdown doesn't know that syntax. This finds that
+// pattern, numbers every callout (Theorem, Definition, Proposition,
+// ...) off one shared counter in document order — the usual math-
+// paper convention where "Theorem 3" can be followed by "Definition
+// 4" — gives it a stable id for linking, and restyles the
+// blockquote into a colored callout box, e.g. "Theorem 3
+// (3.4 Theorem)" with id="callout-theorem-3".
+function styleCallouts() {
+    var COLORS = {
+        theorem: '#42602D', thm: '#42602D', proposition: '#42602D', prop: '#42602D',
+        lemma: '#42602D', corollary: '#42602D', cor: '#42602D',
+        definition: '#2a5c8a', def: '#2a5c8a', example: '#2a5c8a', eg: '#2a5c8a',
+        note: '#2a5c8a', info: '#2a5c8a', tip: '#2a8a5c', hint: '#2a8a5c',
+        question: '#8a5c2a', warning: '#b8860b', caution: '#b8860b', danger: '#b03a2e'
+    };
+    var LABELS = {
+        theorem: 'Theorem', thm: 'Theorem', proposition: 'Proposition', prop: 'Proposition',
+        lemma: 'Lemma', corollary: 'Corollary', cor: 'Corollary',
+        definition: 'Definition', def: 'Definition', example: 'Example', eg: 'Example',
+        note: 'Note', info: 'Info', tip: 'Tip', hint: 'Hint',
+        question: 'Question', warning: 'Warning', caution: 'Caution', danger: 'Danger'
+    };
+    var count = 0;
+    document.querySelectorAll('.post-content blockquote').forEach(function (bq) {
+        var firstP = bq.querySelector('p');
+        if (!firstP || !firstP.firstChild || firstP.firstChild.nodeType !== Node.TEXT_NODE) return;
+        var m = firstP.firstChild.textContent.match(/^\[!([A-Za-z]+)\]\s*([^\n]*)\n?([\s\S]*)$/);
+        if (!m) return;
+        var type = m[1].toLowerCase(), subtitle = m[2], rest = m[3];
+        firstP.firstChild.textContent = rest;
+        if (!firstP.textContent.trim() && firstP.children.length === 0) firstP.remove();
+        var color = COLORS[type] || '#42602D';
+        var label = LABELS[type] || (type.charAt(0).toUpperCase() + type.slice(1));
+        var slug = label.toLowerCase();
+        var number = ++count;
+        bq.id = 'callout-' + slug + '-' + number;
+        var header = document.createElement('div');
+        header.style.cssText = 'font-weight:bold; color:' + color + '; font-size:1.05em; margin-bottom:0.5em;';
+        header.textContent = label + ' ' + number + (subtitle ? ' (' + subtitle + ')' : '');
+        bq.insertBefore(header, bq.firstChild);
+        bq.style.cssText = 'border-left:4px solid ' + color + '; background:#f7f9f4; padding:0.8em 1em; border-radius:4px; margin:1em 0; scroll-margin-top:80px;';
+    });
+}
+
+// Converts kramdown's plain-text ```tikz code fences into the
+// <script type="text/tikz"> elements TikZJax looks for.
+function convertTikzBlocks() {
+    document.querySelectorAll('.post-content pre > code.language-tikz').forEach(function (code) {
+        var tex = code.textContent;
+        var pre = code.parentElement;
+        if (!tex.trim()) { pre.remove(); return; }
+        var tikzScript = document.createElement('script');
+        tikzScript.setAttribute('type', 'text/tikz');
+        tikzScript.textContent = tex;
+        var wrap = document.createElement('div');
+        wrap.className = 'tikz-wrap';
+        wrap.appendChild(tikzScript);
+        pre.replaceWith(wrap);
+    });
+}
+
+// Load MathJax itself, then — once it's both ready and the rest of
+// the page has parsed — convert TikZ blocks, style callouts, load
+// the same LaTeX macro preamble used in Obsidian (blog/preamble.sty,
+// a plain LaTeX \newcommand file Jekyll leaves untouched) as hidden
+// math, and only then typeset, so the preamble's macros are
+// available to every $...$/$$...$$ on the page.
+(function () {
+    var mathJaxReady = new Promise(function (resolve) {
+        var script = document.createElement('script');
+        if (navigator.userAgent.includes("Chrome") || navigator.userAgent.includes("Firefox"))
+            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js";
+        else
+            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
+        script.async = true;
+        script.onload = resolve;
+        document.head.appendChild(script);
+    });
+    var domReady = document.readyState === 'loading'
+        ? new Promise(function (resolve) { document.addEventListener('DOMContentLoaded', resolve); })
+        : Promise.resolve();
+
+    Promise.all([mathJaxReady, domReady]).then(function () {
+        convertTikzBlocks();
+        styleCallouts();
+        // Callout ids only exist from this point on, so if the page
+        // was loaded with a #callout-... hash already in the URL,
+        // the browser's own one-shot scroll-on-load attempt ran too
+        // early and silently failed. Retry it now that the id exists.
+        if (location.hash) {
+            var target = document.getElementById(location.hash.slice(1));
+            if (target) target.scrollIntoView();
+        }
+        var preambleUrl = "{{ '/blog/preamble.sty' | relative_url }}";
+        return fetch(preambleUrl)
+            .then(function (res) { return res.ok ? res.text() : ""; })
+            .catch(function () { return ""; })
+            .then(function (preamble) {
+                var el = document.getElementById("latex-preamble");
+                if (el) el.textContent = "\\[" + preamble + "\\]";
+                return MathJax.startup.promise;
+            })
+            .then(function () {
+                return MathJax.typesetPromise();
+            });
+    });
+})();
+</script>

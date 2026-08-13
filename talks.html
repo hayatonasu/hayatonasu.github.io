@@ -1,190 +1,79 @@
+---
+layout: null
+permalink: /talks.html
+---
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="description" content="Research talks and presentations by Hayato Nasu (Dalhousie University) on categorical logic and category theory.">
         <title>Hayato Nasu's Homepage / Talks</title>
-        <script src="mathjax_setting.js" async></script>
+        <script src="{{ '/mathjax_setting.js' | relative_url }}" async></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
-        <link rel="stylesheet" href="fonts/academicons-1.9.4/css/academicons.min.css"/>
+        <link rel="stylesheet" href="{{ '/fonts/academicons-1.9.4/css/academicons.min.css' | relative_url }}"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link href="style.css" rel="stylesheet" type="text/css" media="all">
-        <link rel="stylesheet" href="zotero-publications.min.css">
+        <link href="{{ '/style.css' | relative_url }}" rel="stylesheet" type="text/css" media="all">
     </head>
     <body class="w3-light-grey">
 
-    <nav class="w3-top w3-white site-nav">
-        <div class="w3-bar w3-padding-small">
-            <a href="index.html" class="w3-bar-item w3-button site-nav-brand">Hayato Nasu</a>
-            <div class="w3-right w3-hide-small">
-                <a href="papers.html" class="w3-bar-item w3-button">Research Papers</a>
-                <a href="talks.html" class="w3-bar-item w3-button">Research Talks</a>
-                <a href="others.html" class="w3-bar-item w3-button">Others</a>
-                <a href="notejapanese.html" class="w3-bar-item w3-button">日本語ノート</a>
-            </div>
-            <button class="w3-bar-item w3-button w3-right w3-hide-medium w3-hide-large" onclick="toggleNav()">&#9776;</button>
-        </div>
-        <div id="navMobile" class="w3-bar-block w3-white w3-hide">
-            <a href="papers.html" class="w3-bar-item w3-button w3-padding">Research Papers</a>
-            <a href="talks.html" class="w3-bar-item w3-button w3-padding">Research Talks</a>
-            <a href="others.html" class="w3-bar-item w3-button w3-padding">Others</a>
-            <a href="notejapanese.html" class="w3-bar-item w3-button w3-padding">日本語ノート</a>
-        </div>
-    </nav>
+    {% include site-nav.html active="talks" %}
 
     <div class="w3-content w3-margin-top" style="max-width:1400px;">
         <div class="w3-container">
             <div id="main" class="w3-white w3-row-padding w3-margin-top" style="margin-left:3%;">
 
-    <h1>Research Talks</h1>
-
-    <div id="container-pres"><p id="zotero-loading" style="font-size:1.1em;">Loading&hellip;</p></div>
+    {% assign talks = site.talks | sort: "date" | reverse %}
+    {% assign has_nonfeatured = false %}
+    <ul id="talks-list" style="list-style:none; padding-left:0; margin:0;">
+    {% for talk in talks %}
+        {% unless talk.featured %}{% assign has_nonfeatured = true %}{% endunless %}
+        {% assign talk_slug = talk.url | split: '/' | last %}
+        <li class="zotero-item{% unless talk.featured %} zotero-item-hidden{% endunless %}{% if talk.featured %} zotero-item-featured{% endif %}" id="{{ talk_slug }}">
+            <div class="zotero-item-header-container">
+                <div class="zotero-item-header">
+                    {% comment %}
+                    standalone: false skips linking to this item's own
+                    /talks/:path/ page — title is plain text; use the
+                    PDF/Link buttons below instead — see README.
+                    {% endcomment %}
+                    {% if talk.standalone == false %}
+                        <h3 class="zotero-item-title">{{ talk.title }}</h3>
+                    {% else %}
+                        <h3 class="zotero-item-title"><a href="{{ talk.url | relative_url }}">{{ talk.title }}</a></h3>
+                    {% endif %}
+                    <div class="zotero-item-subline">
+                        {% if talk.meeting_name %}{{ talk.meeting_name }}{% endif %}
+                        {% if talk.pdf %}<a href="{{ talk.pdf | relative_url }}" rel="nofollow" class="w3-button w3-green w3-round-large w3-small zotero-pdf-btn"><i class="fa fa-download"></i> PDF</a>{% endif %}
+                        {% if talk.link %}<a href="{{ talk.link }}" target="_blank" rel="noopener noreferrer" class="w3-button w3-blue w3-round-large w3-small zotero-pdf-btn">{% if talk.link contains "youtube.com" or talk.link contains "youtu.be" %}<i class="fa-brands fa-youtube"></i> YouTube{% else %}<i class="fa fa-link"></i> Link{% endif %}</a>{% endif %}
+                        {% if talk.paper %}
+                            {% assign related_paper = site.papers | where: "url", talk.paper | first %}
+                            {% if related_paper %}
+                                <a href="{{ related_paper.url | relative_url }}" class="zotero-url-link"><i class="fa fa-file-text"></i> Paper</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    {% assign talk_content_stripped = talk.content | strip_html | strip %}
+                    {% if talk_content_stripped != "" %}
+                        <div class="zotero-item-toggles">
+                            <details class="zotero-item-abstract-details">
+                                <summary class="zotero-item-abstract-toggle">Abstract</summary>
+                                <div class="zotero-item-abstract">{{ talk.content }}</div>
+                            </details>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+    {% if has_nonfeatured %}
+        <button type="button" class="filter-toggle-btn" id="talks-toggle-btn">Show all talks</button>
+    {% endif %}
 
             </div>
         </div>
     </div>
-
-    <script src="zotero-publications.min.js"></script>
-    <script>
-        (function() {
-            var zp = new ZoteroPublications({ group: false, expand: 'all' });
-            var promise = zp.getPublications(10978498);
-            promise.then(function(data) {
-                var loading = document.getElementById('zotero-loading');
-                if (loading) loading.remove();
-                data.raw = data.data = data.raw.filter(function(item) {
-                    return item.data.itemType === 'presentation';
-                });
-                var container = document.getElementById('container-pres');
-                zp.render(data, container).then(function() {
-                    data.raw.forEach(function(item) {
-                        var el = container.querySelector('[data-item="' + item.key + '"]');
-                        if (!el) return;
-                        if (item.data.extra && /^featured:\s*true/im.test(item.data.extra)) {
-                            el.classList.add('zotero-item-featured');
-                        }
-                        var parts = [item.data.meetingName, item.data.place].filter(Boolean)
-                            .concat(item.data.date ? [item.data.date] : []);
-                        var subline = el.querySelector('.zotero-item-subline');
-                        if (parts.length) {
-                            if (subline) { subline.textContent = parts.join(', '); }
-                            else {
-                                var header = el.querySelector('.zotero-item-header');
-                                if (header) {
-                                    var ns = document.createElement('div');
-                                    ns.className = 'zotero-item-subline';
-                                    ns.textContent = parts.join(', ');
-                                    header.appendChild(ns);
-                                }
-                            }
-                        }
-                        if (item.data.url) {
-                            var urlBtn = document.createElement('a');
-                            urlBtn.href = item.data.url;
-                            urlBtn.target = '_blank';
-                            urlBtn.rel = 'noopener noreferrer';
-                            var isYouTube = /youtube\.com|youtu\.be/.test(item.data.url);
-                            urlBtn.className = 'w3-button w3-blue w3-round-large w3-small zotero-pdf-btn';
-                            urlBtn.innerHTML = isYouTube ? '<i class="fa-brands fa-youtube"></i> YouTube' : '<i class="fa fa-link"></i> Link';
-                            var header = el.querySelector('.zotero-item-header');
-                            if (header) {
-                                var sublineUrl = header.querySelector('.zotero-item-subline');
-                                if (sublineUrl) { sublineUrl.appendChild(urlBtn); }
-                                else {
-                                    var ns3 = document.createElement('div');
-                                    ns3.className = 'zotero-item-subline';
-                                    ns3.appendChild(urlBtn);
-                                    header.appendChild(ns3);
-                                }
-                            }
-                        }
-                        if (item.data.abstractNote) {
-                            var details = document.createElement('details');
-                            details.className = 'zotero-item-abstract-details';
-                            var summary = document.createElement('summary');
-                            summary.className = 'zotero-item-abstract-toggle';
-                            summary.textContent = 'Abstract';
-                            var abs = document.createElement('div');
-                            abs.className = 'zotero-item-abstract';
-                            var urlPattern = /(https?:\/\/[^\s]+)/g;
-                            var parts = item.data.abstractNote.split(urlPattern);
-                            parts.forEach(function(part) {
-                                if (urlPattern.test(part)) {
-                                    var a = document.createElement('a');
-                                    a.href = part;
-                                    a.textContent = part;
-                                    a.target = '_blank';
-                                    a.rel = 'noopener noreferrer';
-                                    abs.appendChild(a);
-                                } else {
-                                    abs.appendChild(document.createTextNode(part));
-                                }
-                                urlPattern.lastIndex = 0;
-                            });
-                            details.appendChild(summary);
-                            details.appendChild(abs);
-                            el.appendChild(details);
-                            (window.MathJax && MathJax.startup
-                                ? MathJax.startup.promise
-                                : Promise.resolve()
-                            ).then(function() {
-                                if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([abs]);
-                            });
-                        }
-                    });
-                    var hasFeatured = data.raw.some(function(item) {
-                        return item.data.extra && /^featured:\s*true/im.test(item.data.extra);
-                    });
-                    if (hasFeatured) {
-                        data.raw.forEach(function(item) {
-                            if (item.data.extra && /^featured:\s*true/im.test(item.data.extra)) return;
-                            var el = container.querySelector('[data-item="' + item.key + '"]');
-                            if (el) el.classList.add('zotero-item-hidden');
-                        });
-                        var toggleBtn = document.createElement('button');
-                        toggleBtn.className = 'filter-toggle-btn';
-                        toggleBtn.textContent = 'Show all talks';
-                        var showingAll = false;
-                        toggleBtn.addEventListener('click', function() {
-                            showingAll = !showingAll;
-                            container.classList.toggle('show-all', showingAll);
-                            toggleBtn.textContent = showingAll ? 'Show featured only' : 'Show all talks';
-                        });
-                        container.after(toggleBtn);
-                    }
-                    container.querySelectorAll('.zotero-item-title').forEach(function(titleEl) {
-                        var hasPdf = false;
-                        titleEl.childNodes.forEach(function(node) {
-                            if (node.nodeType === Node.TEXT_NODE && /\[PDF\]/.test(node.textContent)) {
-                                hasPdf = true;
-                                node.textContent = node.textContent.replace(/\s*\[PDF\]/, '');
-                            }
-                        });
-                        var link = titleEl.querySelector('a');
-                        var pdfUrl = link ? link.href : '';
-                        if (link) link.replaceWith(document.createTextNode(link.textContent));
-                        if (!hasPdf || !pdfUrl) return;
-                        var btn = document.createElement('a');
-                        btn.href = pdfUrl; btn.rel = 'nofollow';
-                        btn.className = 'w3-button w3-green w3-round-large w3-small zotero-pdf-btn';
-                        btn.innerHTML = '<i class="fa fa-download"></i> PDF';
-                        var header = titleEl.closest('.zotero-item-header');
-                        if (!header) return;
-                        var subline = header.querySelector('.zotero-item-subline');
-                        if (subline) { subline.appendChild(btn); }
-                        else {
-                            var ns2 = document.createElement('div');
-                            ns2.className = 'zotero-item-subline';
-                            ns2.appendChild(btn);
-                            header.appendChild(ns2);
-                        }
-                    });
-                });
-            });
-            promise.catch(function(reason) { console.warn(reason); });
-        })();
-    </script>
 
 <footer class="site-footer">
     <span>Hayato Nasu &mdash; PhD student, <a href="https://www.dal.ca/">Dalhousie University</a> &nbsp;&middot;&nbsp; <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
@@ -192,17 +81,27 @@
 </footer>
 
     <script>
-function toggleNav() {
-    document.getElementById("navMobile").classList.toggle("w3-show");
-}
-window.addEventListener("resize", function() {
-    if (window.innerWidth >= 601) document.getElementById("navMobile").classList.remove("w3-show");
-});
 (function() {
-    var page = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.site-nav a.w3-bar-item').forEach(function(a) {
-        if (a.getAttribute('href') === page) a.classList.add('site-nav-active');
-    });
+    var btn = document.getElementById('talks-toggle-btn');
+    var list = document.getElementById('talks-list');
+    if (!btn || !list) return;
+    var showingAll = false;
+    function setShowingAll(value) {
+        showingAll = value;
+        list.classList.toggle('show-all', showingAll);
+        btn.textContent = showingAll ? 'Show featured only' : 'Show all talks';
+    }
+    btn.addEventListener('click', function() { setShowingAll(!showingAll); });
+    // If the page was linked to with a #hash pointing at a non-featured
+    // (hidden) talk, reveal it and jump there — otherwise it's invisible
+    // and the browser's native anchor scroll does nothing.
+    if (location.hash) {
+        var target = document.getElementById(location.hash.slice(1));
+        if (target && target.classList.contains('zotero-item-hidden')) {
+            setShowingAll(true);
+            target.scrollIntoView();
+        }
+    }
 })();
     </script>
 

@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "jekyll serve",
+            "type": "shell",
+            "command": "export PATH=\"$HOME/.local/share/gem/ruby/3.2.0/bin:$PATH\"; bundle exec jekyll serve --host 127.0.0.1 --port 4000 --livereload",
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^ERROR: (.*)$",
+                    "message": 1
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^\\s*Generating\\.\\.\\.",
+                    "endsPattern": "^\\s*Server running\\.\\.\\."
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

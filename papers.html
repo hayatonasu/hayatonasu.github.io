@@ -1,45 +1,87 @@
+---
+layout: null
+permalink: /papers.html
+---
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="description" content="Research papers and preprints by Hayato Nasu (Dalhousie University) on categorical logic and category theory.">
         <title>Hayato Nasu's Homepage / Papers</title>
-        <script src="mathjax_setting.js" async></script>
+        <script src="{{ '/mathjax_setting.js' | relative_url }}" async></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
-        <link rel="stylesheet" href="fonts/academicons-1.9.4/css/academicons.min.css"/>
+        <link rel="stylesheet" href="{{ '/fonts/academicons-1.9.4/css/academicons.min.css' | relative_url }}"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link href="style.css" rel="stylesheet" type="text/css" media="all">
-        <link rel="stylesheet" href="zotero-publications.min.css">
+        <link href="{{ '/style.css' | relative_url }}" rel="stylesheet" type="text/css" media="all">
     </head>
     <body class="w3-light-grey publication-page">
 
-    <nav class="w3-top w3-white site-nav">
-        <div class="w3-bar w3-padding-small">
-            <a href="index.html" class="w3-bar-item w3-button site-nav-brand">Hayato Nasu</a>
-            <div class="w3-right w3-hide-small">
-                <a href="papers.html" class="w3-bar-item w3-button">Research Papers</a>
-                <a href="talks.html" class="w3-bar-item w3-button">Research Talks</a>
-                <a href="others.html" class="w3-bar-item w3-button">Others</a>
-                <a href="notejapanese.html" class="w3-bar-item w3-button">日本語ノート</a>
-            </div>
-            <button class="w3-bar-item w3-button w3-right w3-hide-medium w3-hide-large" onclick="toggleNav()">&#9776;</button>
-        </div>
-        <div id="navMobile" class="w3-bar-block w3-white w3-hide">
-            <a href="papers.html" class="w3-bar-item w3-button w3-padding">Research Papers</a>
-            <a href="talks.html" class="w3-bar-item w3-button w3-padding">Research Talks</a>
-            <a href="others.html" class="w3-bar-item w3-button w3-padding">Others</a>
-            <a href="notejapanese.html" class="w3-bar-item w3-button w3-padding">日本語ノート</a>
-        </div>
-    </nav>
+    {% include site-nav.html active="papers" %}
 
     <div class="w3-content w3-margin-top" style="max-width:1400px;">
         <div class="w3-container">
             <div id="main" class="w3-white w3-row-padding w3-margin-top" style="margin-left:3%;">
 
-    <h1>Research papers</h1>
-
-    <div id="container-pub"><p id="zotero-loading" style="font-size:1.1em;">Loading&hellip;</p></div>
+    {% assign type_order = "journalArticle,conferencePaper,preprint,manuscript,thesis" | split: "," %}
+    {% assign type_labels = "Journal Articles,Conference Papers,Preprints,Manuscripts,Theses" | split: "," %}
+    {% for type in type_order %}
+        {% assign label = type_labels[forloop.index0] %}
+        {% assign items = site.papers | where: "type", type | sort: "date" | reverse %}
+        {% if items.size > 0 %}
+            <h2 class="zotero-group-title">{{ label }}</h2>
+            <ul style="list-style:none; padding-left:0; margin:0;">
+            {% for paper in items %}
+                {% assign paper_slug = paper.url | split: '/' | last %}
+                <li class="zotero-item" id="{{ paper_slug }}">
+                    <div class="zotero-item-header-container">
+                        <div class="zotero-item-header">
+                            {% comment %}
+                            standalone: false skips linking to this item's own
+                            /papers/:path/ page — title is plain text; use the
+                            PDF/arXiv/Link buttons below instead — see README.
+                            {% endcomment %}
+                            {% if paper.standalone == false %}
+                                <h3 class="zotero-item-title">{{ paper.title }}</h3>
+                            {% else %}
+                                <h3 class="zotero-item-title"><a href="{{ paper.url | relative_url }}">{{ paper.title }}</a></h3>
+                            {% endif %}
+                            {% if paper.authors and paper.authors.size > 0 or paper.tags and paper.tags.size > 0 %}
+                                <div class="zotero-item-authors">
+                                    {% if paper.authors and paper.authors.size > 0 %}{% for author in paper.authors %}{% if author == "Hayato Nasu" %}<strong>{{ author }}</strong>{% else %}{{ author }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}
+                                    {% if paper.tags and paper.tags.size > 0 %}{% for tag in paper.tags %}<span class="w3-tag w3-small site-tag">{{ tag }}</span>{% endfor %}{% endif %}
+                                </div>
+                            {% endif %}
+                            <div class="zotero-item-subline">
+                                {% if paper.venue %}{{ paper.venue }}{% endif %}{% if paper.thesis_type %} &mdash; {{ paper.thesis_type }}{% endif %}{% if paper.date %}{% if paper.venue %}, {% endif %}{{ paper.date | date: "%Y" }}{% endif %}
+                                {% if paper.pdf %}<a href="{{ paper.pdf | relative_url }}" rel="nofollow" class="w3-button w3-green w3-round-large w3-small zotero-pdf-btn"><i class="fa fa-download"></i> PDF</a>{% endif %}
+                                {% if paper.arxiv %}<a href="{{ paper.arxiv }}" rel="nofollow" class="zotero-arxiv-btn"><i class="ai ai-arxiv"></i> arXiv</a>{% endif %}
+                            </div>
+                            {% assign paper_content_stripped = paper.content | strip_html | strip %}
+                            {% if paper_content_stripped != "" or paper.bibtex %}
+                                <div class="zotero-item-toggles">
+                                    {% if paper_content_stripped != "" %}
+                                        <details class="zotero-item-abstract-details">
+                                            <summary class="zotero-item-abstract-toggle">Abstract</summary>
+                                            <div class="zotero-item-abstract">{{ paper.content }}</div>
+                                        </details>
+                                    {% endif %}
+                                    {% if paper.bibtex %}
+                                        <details class="zotero-item-abstract-details">
+                                            <summary class="zotero-item-abstract-toggle">Cite</summary>
+                                            <pre class="paper-bibtex" style="background:#f7f9f4; border:1px solid #e0e8d8; border-radius:4px; padding:0.6em 0.8em; overflow-x:auto; font-size:0.8em; margin:0.4em 0;">{{ paper.bibtex }}</pre>
+                                            <button type="button" class="filter-toggle-btn copy-bibtex-btn" style="margin-top:0;">Copy BibTeX</button>
+                                        </details>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endfor %}
 
             </div>
         </div>
@@ -51,125 +93,19 @@
 </footer>
 
     <script>
-function toggleNav() {
-    document.getElementById("navMobile").classList.toggle("w3-show");
-}
-window.addEventListener("resize", function() {
-    if (window.innerWidth >= 601) document.getElementById("navMobile").classList.remove("w3-show");
-});
 (function() {
-    var page = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.site-nav a.w3-bar-item').forEach(function(a) {
-        if (a.getAttribute('href') === page) a.classList.add('site-nav-active');
+    document.querySelectorAll('.copy-bibtex-btn').forEach(function(btn) {
+        var pre = btn.previousElementSibling;
+        if (!pre) return;
+        btn.addEventListener('click', function() {
+            navigator.clipboard.writeText(pre.textContent.trim()).then(function() {
+                var original = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(function() { btn.textContent = original; }, 1500);
+            });
+        });
     });
 })();
-    </script>
-
-    <script src="zotero-publications.min.js"></script>
-    <script>
-        (function() {
-            var paperTypes = ['journalArticle', 'conferencePaper', 'thesis', 'manuscript', 'preprint'];
-            var zp = new ZoteroPublications({ group: 'type' });
-            var promise = zp.getPublications(10978498);
-            promise.then(function(data) {
-                var loading = document.getElementById('zotero-loading');
-                if (loading) loading.remove();
-                data.raw = data.data = data.raw.filter(function(item) {
-                    return paperTypes.indexOf(item.data.itemType) !== -1;
-                });
-                var container = document.getElementById('container-pub');
-                zp.render(data, container).then(function() {
-                    data.raw.forEach(function(item) {
-                        var el = container.querySelector('[data-item="' + item.key + '"]');
-                        if (item.data.itemType === 'thesis') {
-                            if (el && item.data.thesisType) {
-                                var s = el.querySelector('.zotero-item-subline');
-                                if (s) s.textContent = item.data.thesisType + ' — ' + s.textContent;
-                            }
-                            return;
-                        }
-                        if (!el || !item.data.creators) return;
-                        var authors = item.data.creators
-                            .filter(function(c) { return c.creatorType === 'author'; })
-                            .map(function(c) {
-                                return c.firstName && c.lastName
-                                    ? c.firstName + ' ' + c.lastName
-                                    : (c.name || '');
-                            }).filter(Boolean);
-                        if (!authors.length) return;
-                        var authorDiv = document.createElement('div');
-                        authorDiv.className = 'zotero-item-authors';
-                        authorDiv.innerHTML = authors.map(function(name) {
-                            return name === 'Hayato Nasu' ? '<strong>' + name + '</strong>' : name;
-                        }).join(', ');
-                        var header = el.querySelector('.zotero-item-header');
-                        if (!header) return;
-                        var subline = header.querySelector('.zotero-item-subline');
-                        if (subline) {
-                            header.insertBefore(authorDiv, subline);
-                            if (subline.textContent.trimStart().startsWith('By ')) {
-                                var lastComma = subline.textContent.lastIndexOf(', ');
-                                subline.textContent = lastComma !== -1 ? subline.textContent.slice(lastComma + 2) : '';
-                            }
-                        } else { header.appendChild(authorDiv); }
-                    });
-                    data.raw.forEach(function(item) {
-                        var arxivUrl = null;
-                        if (item.data.url && /arxiv\.org/i.test(item.data.url)) {
-                            arxivUrl = item.data.url;
-                        } else if (item.data.extra) {
-                            var m = item.data.extra.match(/arxiv[:\s]+(\d{4}\.\d{4,5})/i);
-                            if (m) arxivUrl = 'https://arxiv.org/abs/' + m[1];
-                        }
-                        if (!arxivUrl) return;
-                        var el = container.querySelector('[data-item="' + item.key + '"]');
-                        if (!el) return;
-                        var arxivBtn = document.createElement('a');
-                        arxivBtn.href = arxivUrl; arxivBtn.rel = 'nofollow';
-                        arxivBtn.className = 'zotero-arxiv-btn';
-                        arxivBtn.innerHTML = '<i class="ai ai-arxiv"></i> arXiv';
-                        var header = el.querySelector('.zotero-item-header');
-                        if (!header) return;
-                        var subline = header.querySelector('.zotero-item-subline');
-                        if (subline) { subline.appendChild(arxivBtn); }
-                        else {
-                            var ns = document.createElement('div');
-                            ns.className = 'zotero-item-subline';
-                            ns.appendChild(arxivBtn);
-                            header.appendChild(ns);
-                        }
-                    });
-                    container.querySelectorAll('.zotero-item-title').forEach(function(titleEl) {
-                        var hasPdf = false;
-                        titleEl.childNodes.forEach(function(node) {
-                            if (node.nodeType === Node.TEXT_NODE && /\[PDF\]/.test(node.textContent)) {
-                                hasPdf = true;
-                                node.textContent = node.textContent.replace(/\s*\[PDF\]/, '');
-                            }
-                        });
-                        var link = titleEl.querySelector('a');
-                        var pdfUrl = link ? link.href : '';
-                        if (link) link.replaceWith(document.createTextNode(link.textContent));
-                        if (!hasPdf || !pdfUrl) return;
-                        var btn = document.createElement('a');
-                        btn.href = pdfUrl; btn.rel = 'nofollow';
-                        btn.className = 'w3-button w3-green w3-round-large w3-small zotero-pdf-btn';
-                        btn.innerHTML = '<i class="fa fa-download"></i> PDF';
-                        var header = titleEl.closest('.zotero-item-header');
-                        if (!header) return;
-                        var subline = header.querySelector('.zotero-item-subline');
-                        if (subline) { subline.appendChild(btn); }
-                        else {
-                            var ns2 = document.createElement('div');
-                            ns2.className = 'zotero-item-subline';
-                            ns2.appendChild(btn);
-                            header.appendChild(ns2);
-                        }
-                    });
-                });
-            });
-            promise.catch(function(reason) { console.warn(reason); });
-        })();
     </script>
 
     </body>

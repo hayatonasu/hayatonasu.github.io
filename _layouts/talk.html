@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 | default: page.title }}">
+        <title>{{ page.title }} &middot; Hayato Nasu</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+        <link rel="stylesheet" href="{{ '/fonts/academicons-1.9.4/css/academicons.min.css' | relative_url }}"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link href="{{ '/style.css' | relative_url }}" rel="stylesheet" type="text/css" media="all">
+
+        {% include math-head.html %}
+    </head>
+    <body class="w3-light-grey">
+
+    {% include site-nav.html active="talks" %}
+
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+        <div class="w3-container">
+            <div id="main" class="w3-white w3-row-padding w3-margin-top" style="margin-left:3%;">
+                <div class="w3-container">
+
+                    <p><a href="{{ '/talks.html' | relative_url }}">&larr; Back to Talks</a></p>
+
+                    <h1 style="color:#42602D;"><b>{{ page.title }}</b></h1>
+
+                    <div class="zotero-item-location">
+                        {% if page.meeting_name %}{{ page.meeting_name }}{% endif %}
+                    </div>
+
+                    <p>
+                        {% if page.pdf %}<a href="{{ page.pdf | relative_url }}" rel="nofollow" class="w3-button w3-green w3-round-large w3-small zotero-pdf-btn"><i class="fa fa-download"></i> PDF</a>{% endif %}
+                        {% if page.link %}<a href="{{ page.link }}" target="_blank" rel="noopener noreferrer" class="w3-button w3-blue w3-round-large w3-small zotero-pdf-btn">{% if page.link contains "youtube.com" or page.link contains "youtu.be" %}<i class="fa-brands fa-youtube"></i> YouTube{% else %}<i class="fa fa-link"></i> Link{% endif %}</a>{% endif %}
+                        {% if page.paper %}
+                            {% assign related_paper = site.papers | where: "url", page.paper | first %}
+                            {% if related_paper %}
+                                <a href="{{ related_paper.url | relative_url }}" class="zotero-url-link"><i class="fa fa-file-text"></i> Paper</a>
+                            {% endif %}
+                        {% endif %}
+                    </p>
+
+                    <div id="latex-preamble" style="display:none"></div>
+
+                    <div class="post-content" style="line-height:1.7; margin-top:1.5em;">
+                        {{ content }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer class="site-footer">
+    <span>Hayato Nasu &mdash; PhD student, <a href="https://www.dal.ca/">Dalhousie University</a> &nbsp;&middot;&nbsp; <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
+    <span class="site-footer-copy">&copy; Hayato Nasu</span>
+</footer>
+
+
+    </body>
+</html>

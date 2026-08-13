@@ -2,42 +2,45 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Helvetica Neue", sans-serif}
 p {font-family: "Helvetica Neue", sans-serif}
 
 .site-nav {
-    position: sticky !important;
+    position: sticky;
     top: 0;
     z-index: 100;
-    background-color: #42602D !important;
+    background-color: #42602D;
     box-shadow: 0 2px 6px rgba(0,0,0,0.18);
-}
-
-.site-nav .w3-bar {
-    background-color: #42602D !important;
-}
-
-.site-nav .w3-bar-item,
-.site-nav .w3-bar-item:visited {
-    color: #fff !important;
+    padding: 0.5em 1em 0.4em;
 }
 
 .site-nav-brand {
+    display: inline-block;
     font-weight: bold;
-    font-size: 1.05em;
+    font-size: 1.15em;
     letter-spacing: 0.02em;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 0.35em;
 }
 
-.site-nav a.w3-bar-item:hover,
-.site-nav button.w3-bar-item:hover {
-    background-color: rgba(255,255,255,0.15) !important;
-    color: #fff !important;
+.site-nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2em;
 }
 
-.site-nav a.site-nav-active {
-    background-color: rgba(255,255,255,0.22) !important;
+.site-nav-tabs a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9em;
+    padding: 0.3em 0.7em;
+    border-radius: 4px;
+}
+
+.site-nav-tabs a:hover {
+    background-color: rgba(255,255,255,0.15);
+}
+
+.site-nav-tabs a.site-nav-active {
+    background-color: rgba(255,255,255,0.22);
     font-weight: bold;
-}
-
-.site-nav .w3-bar-block {
-    background-color: #42602D !important;
-    border-top: 1px solid rgba(255,255,255,0.2);
 }
 
 @media (min-width: 572px) {
@@ -119,14 +122,14 @@ p {font-family: "Helvetica Neue", sans-serif}
 /* Zotero Publications overrides */
 .zotero-item-authors {
     color: #555;
-    font-size: 0.9em;
-    margin: 0.15em 0;
+    font-size: 0.85em;
+    margin: 0.1em 0;
 }
 
 .zotero-item-location {
     color: #555;
-    font-size: 0.9em;
-    margin: 0.15em 0;
+    font-size: 0.85em;
+    margin: 0.1em 0;
 }
 
 .zotero-publications {
@@ -143,14 +146,23 @@ p {font-family: "Helvetica Neue", sans-serif}
 }
 
 .zotero-item-title {
+    display: block;
+    color: #42602D;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1.3;
+    margin: 0 0 0.1em;
+}
+
+.zotero-item-title a {
     color: #42602D;
 }
 
 .zotero-group-title {
-    font-size: 2em;
+    font-size: 1.4em;
     font-weight: bold;
     color: #42602D;
-    margin: 0.67em 0;
+    margin: 0.8em 0 0.4em;
 }
 
 .zotero-pdf-btn {
@@ -184,10 +196,11 @@ p {font-family: "Helvetica Neue", sans-serif}
 
 .zotero-item {
     border-left: 3px solid #42602D;
-    padding: 0.6em 1em;
+    padding: 0.5em 0.8em;
     background-color: #ffffff;
     border-radius: 4px;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.4em;
+    scroll-margin-top: 80px;
 }
 
 body:not(.publication-page) .zotero-details,
@@ -228,11 +241,6 @@ body:not(.publication-page) .zotero-item-actions {
     margin-left: 0.6em;
 }
 
-.zotero-item-featured,
-.publication-page .zotero-item {
-    background-color: #f0f5ea;
-}
-
 .zotero-item-featured {
     border-left: 4px solid #42602D;
 }
@@ -242,14 +250,20 @@ body:not(.publication-page) .zotero-item-actions {
 }
 
 
-.zotero-item-abstract-details {
-    margin-top: 0.6em;
+.zotero-item-toggles {
+    display: flex;
+    gap: 1.2em;
+    margin-top: 0.4em;
     border-top: 1px solid #e0e8d8;
-    padding-top: 0.4em;
+    padding-top: 0.3em;
+}
+
+.zotero-item-abstract-details {
+    margin-top: 0;
 }
 
 .zotero-item-abstract-toggle {
-    font-size: 0.85em;
+    font-size: 0.8em;
     color: #42602D;
     cursor: pointer;
     user-select: none;
@@ -257,6 +271,12 @@ body:not(.publication-page) .zotero-item-actions {
     display: inline-flex;
     align-items: center;
     gap: 0.3em;
+}
+
+.site-tag {
+    background-color: #f0f5ea !important;
+    color: #000 !important;
+    margin-right: 0.4em;
 }
 
 .zotero-item-abstract-toggle::-webkit-details-marker { display: none; }

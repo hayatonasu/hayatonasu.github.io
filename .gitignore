@@ -1,0 +1,12 @@
+# Local Jekyll preview (bundle install / jekyll serve), not needed by
+# GitHub Pages' own build.
+_site/
+.jekyll-cache/
+.jekyll-metadata
+vendor/
+.bundle/
+Gemfile.lock
+
+# npm dependency tree — package.json has no dependencies right now, but
+# keep this ignored so a stray `npm install` doesn't get committed again.
+node_modules/

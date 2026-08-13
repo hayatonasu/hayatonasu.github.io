@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 | default: page.title }}">
+        <title>{{ page.title }} &middot; Hayato Nasu</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+        <link rel="stylesheet" href="{{ '/fonts/academicons-1.9.4/css/academicons.min.css' | relative_url }}"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link href="{{ '/style.css' | relative_url }}" rel="stylesheet" type="text/css" media="all">
+
+        {% include math-head.html %}
+    </head>
+    <body class="w3-light-grey publication-page">
+
+    {% include site-nav.html active="papers" %}
+
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+        <div class="w3-container">
+            <div id="main" class="w3-white w3-row-padding w3-margin-top" style="margin-left:3%;">
+                <div class="w3-container">
+
+                    <p><a href="{{ '/papers.html' | relative_url }}">&larr; Back to Papers</a></p>
+
+                    <h1 style="color:#42602D;"><b>{{ page.title }}</b></h1>
+
+                    {% if page.authors and page.authors.size > 0 or page.tags and page.tags.size > 0 %}
+                        <div class="zotero-item-authors">
+                            {% if page.authors and page.authors.size > 0 %}{% for author in page.authors %}{% if author == "Hayato Nasu" %}<strong>{{ author }}</strong>{% else %}{{ author }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}
+                            {% if page.tags and page.tags.size > 0 %}{% for tag in page.tags %}<span class="w3-tag w3-small site-tag">{{ tag }}</span>{% endfor %}{% endif %}
+                        </div>
+                    {% endif %}
+
+                    <div class="zotero-item-location">
+                        {% if page.venue %}{{ page.venue }}{% endif %}{% if page.thesis_type %} &mdash; {{ page.thesis_type }}{% endif %}{% if page.date %}{% if page.venue %}, {% endif %}{{ page.date | date: "%Y" }}{% endif %}
+                    </div>
+
+                    <p>
+                        {% if page.pdf %}<a href="{{ page.pdf | relative_url }}" rel="nofollow" class="w3-button w3-green w3-round-large w3-small zotero-pdf-btn"><i class="fa fa-download"></i> PDF</a>{% endif %}
+                        {% if page.arxiv %}<a href="{{ page.arxiv }}" rel="nofollow" class="zotero-arxiv-btn"><i class="ai ai-arxiv"></i> arXiv</a>{% endif %}
+                        {% if page.link %}<a href="{{ page.link }}" target="_blank" rel="noopener noreferrer" class="zotero-url-link"><i class="fa fa-link"></i> Link</a>{% endif %}
+                    </p>
+
+                    {% if page.bibtex %}
+                        <details class="zotero-item-abstract-details">
+                            <summary class="zotero-item-abstract-toggle">Cite</summary>
+                            <pre class="paper-bibtex" style="background:#f7f9f4; border:1px solid #e0e8d8; border-radius:4px; padding:1em; overflow-x:auto; font-size:0.85em;">{{ page.bibtex }}</pre>
+                            <button type="button" class="filter-toggle-btn copy-bibtex-btn" style="margin-top:0;">Copy BibTeX</button>
+                        </details>
+                    {% endif %}
+
+                    <div id="latex-preamble" style="display:none"></div>
+
+                    <div class="post-content" style="line-height:1.7; margin-top:1.5em;">
+                        {{ content }}
+                    </div>
+
+                    {% assign related_talks = site.talks | where: "paper", page.url %}
+                    {% if related_talks.size > 0 %}
+                        <p style="margin-top:1.5em;"><strong style="color:#42602D;">Related talks:</strong> {% for t in related_talks %}{% assign t_slug = t.url | split: '/' | last %}<a href="{{ '/talks.html' | relative_url }}#{{ t_slug }}">{{ t.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer class="site-footer">
+    <span>Hayato Nasu &mdash; PhD student, <a href="https://www.dal.ca/">Dalhousie University</a> &nbsp;&middot;&nbsp; <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
+    <span class="site-footer-copy">&copy; Hayato Nasu</span>
+</footer>
+
+    <script>
+{% if page.bibtex %}
+(function () {
+    var btn = document.querySelector('.copy-bibtex-btn');
+    var pre = document.querySelector('.paper-bibtex');
+    if (!btn || !pre) return;
+    btn.addEventListener('click', function () {
+        navigator.clipboard.writeText(pre.textContent.trim()).then(function () {
+            var original = btn.textContent;
+            btn.textContent = 'Copied!';
+            setTimeout(function () { btn.textContent = original; }, 1500);
+        });
+    });
+})();
+{% endif %}
+    </script>
+
+    </body>
+</html>

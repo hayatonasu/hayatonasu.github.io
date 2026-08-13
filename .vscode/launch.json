@@ -2,9 +2,15 @@
     "configurations": [
         {
             "type": "chrome",
-            "name": "http://127.0.0.1:3000/index.html",
+            "name": "Preview (jekyll serve, home)",
             "request": "launch",
-            "url": "http://127.0.0.1:3000/index.html"
+            "url": "http://127.0.0.1:4000/"
+        },
+        {
+            "type": "chrome",
+            "name": "Preview (jekyll serve, blog)",
+            "request": "launch",
+            "url": "http://127.0.0.1:4000/blog/"
         }
     ]
 }

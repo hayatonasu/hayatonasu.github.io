@@ -1,2 +1,52 @@
 plugins:
   - jekyll-sitemap
+
+# Blog post URLs live entirely under /blog/, so they can never collide
+# with the existing top-level .html pages, which Jekyll passes through
+# untouched (they are not covered by any Jekyll convention).
+permalink: /blog/:year/:month/:day/:title/
+
+# Papers, talks, and notes are Jekyll collections (one file per item),
+# each with their own permalink, listed on papers.html/talks.html/
+# others.html/notejapanese.html.
+collections:
+  papers:
+    output: true
+    permalink: /papers/:path/
+  talks:
+    output: true
+    permalink: /talks/:path/
+  notes:
+    output: true
+    permalink: /notes/:path/
+  notes_ja:
+    output: true
+    permalink: /notes-ja/:path/
+
+# Only _posts/ is turned into blog content; everything else on the site
+# stays exactly as it is on disk.
+markdown: kramdown
+kramdown:
+  input: GFM
+  # kramdown's own math span syntax is $$...$$ (inline or block); with
+  # math_engine: mathjax it rewrites that to \(...\) / \[...\], which are
+  # MathJax's default delimiters, so no server-side math rendering happens.
+  # Single-dollar $...$ math is *not* parsed specially by kramdown at all —
+  # it passes straight through as literal text — but the MathJax config in
+  # _layouts/post.html also listens for $...$, so it still renders in the
+  # browser. This means both $...$ and $$...$$ work in post source.
+  math_engine: mathjax
+  syntax_highlighter: rouge
+
+# Keep Jekyll from trying to process files/directories that don't need it.
+exclude:
+  - node_modules
+  - vendor         # local `bundle install` gems, only present for local `jekyll serve`
+  - Gemfile
+  - Gemfile.lock
+  - package.json
+  - README.md
+
+# Existing top-level HTML files (index.html, papers.html, talks.html, ...)
+# are plain static files with no front matter, so Jekyll serves them
+# as-is without any change to their content or URLs.

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 | default: 'Blog post by Hayato Nasu.' }}">
+        <title>{{ page.title }} &middot; Hayato Nasu</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+        <link rel="stylesheet" href="{{ '/fonts/academicons-1.9.4/css/academicons.min.css' | relative_url }}"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link href="{{ '/style.css' | relative_url }}" rel="stylesheet" type="text/css" media="all">
+
+        {% include math-head.html %}
+    </head>
+    <body class="w3-light-grey">
+
+    {% include site-nav.html active="blog" %}
+
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+        <div class="w3-container">
+            <div id="main" class="w3-white w3-row-padding w3-margin-top" style="margin-left:3%;">
+                <div class="w3-container">
+
+                    <p><a href="{{ '/blog/' | relative_url }}">&larr; Back to Blog</a></p>
+
+                    <h1 style="color:#42602D;"><b>{{ page.title }}</b></h1>
+                    <p class="news-date" style="font-size:0.9em; color:#777;">
+                        {{ page.date | date: "%B %-d, %Y" }}
+                        {% if page.tags and page.tags.size > 0 %}
+                            &middot;
+                            {% for tag in page.tags %}<span class="w3-tag w3-small site-tag">{{ tag }}</span>{% endfor %}
+                        {% endif %}
+                    </p>
+
+                    {% comment %}
+                    Filled in by JavaScript above with the contents of
+                    blog/preamble.sty before MathJax typesets the rest of
+                    the page — see the script in <head>.
+                    {% endcomment %}
+                    <div id="latex-preamble" style="display:none"></div>
+
+                    <div class="post-content" style="line-height:1.7; margin-top:1.5em;">
+                        {{ content }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer class="site-footer">
+    <span>Hayato Nasu &mdash; PhD student, <a href="https://www.dal.ca/">Dalhousie University</a> &nbsp;&middot;&nbsp; <a href="mailto:hnasu@dal.ca">hnasu [at] dal.ca</a></span>
+    <span class="site-footer-copy">&copy; Hayato Nasu</span>
+</footer>
+
+
+    </body>
+</html>

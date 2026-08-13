@@ -13,22 +13,12 @@
     </head>
     <body class="w3-light-grey">
 
-    <nav class="w3-top w3-white site-nav">
-        <div class="w3-bar w3-padding-small">
-            <a href="index.html" class="w3-bar-item w3-button site-nav-brand">Hayato Nasu</a>
-            <div class="w3-right w3-hide-small">
-                <a href="papers.html" class="w3-bar-item w3-button">Research Papers</a>
-                <a href="talks.html" class="w3-bar-item w3-button">Research Talks</a>
-                <a href="others.html" class="w3-bar-item w3-button">Others</a>
-                <a href="notejapanese.html" class="w3-bar-item w3-button">日本語ノート</a>
-            </div>
-            <button class="w3-bar-item w3-button w3-right w3-hide-medium w3-hide-large" onclick="toggleNav()">&#9776;</button>
-        </div>
-        <div id="navMobile" class="w3-bar-block w3-white w3-hide">
-            <a href="papers.html" class="w3-bar-item w3-button w3-padding">Research Papers</a>
-            <a href="talks.html" class="w3-bar-item w3-button w3-padding">Research Talks</a>
-            <a href="others.html" class="w3-bar-item w3-button w3-padding">Others</a>
-            <a href="notejapanese.html" class="w3-bar-item w3-button w3-padding">日本語ノート</a>
+    <nav class="site-nav">
+        <div class="site-nav-tabs">
+            <a href="papers.html">Research Papers</a>
+            <a href="talks.html">Research Talks</a>
+            <a href="others.html">Others</a>
+            <a href="notejapanese.html">日本語ノート</a>
         </div>
     </nav>
 
@@ -73,19 +63,6 @@
 </footer>
 
     <script>
-function toggleNav() {
-    document.getElementById("navMobile").classList.toggle("w3-show");
-}
-window.addEventListener("resize", function() {
-    if (window.innerWidth >= 601) document.getElementById("navMobile").classList.remove("w3-show");
-});
-(function() {
-    var page = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.site-nav a.w3-bar-item').forEach(function(a) {
-        if (a.getAttribute('href') === page) a.classList.add('site-nav-active');
-    });
-})();
-
 const iconMap = {
     "arxiv": '<i class="ai ai-arxiv news-icon"></i>',
     "graduation-cap": '<i class="fa fa-graduation-cap news-icon"></i>',

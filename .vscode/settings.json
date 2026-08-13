@@ -1,3 +1,4 @@
 {
-    "liveServer.settings.multiRootWorkspaceName": "hayatonasu_homepage"
+    "liveServer.settings.multiRootWorkspaceName": "hayatonasu_homepage",
+    "markdown.math.enabled": true
 }

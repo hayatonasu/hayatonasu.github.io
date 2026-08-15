@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<!-- Html template adapted from Matt Amy's atcat.html -->
+<head>
+  <title>ATCAT</title>
+  
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Spectral&display=swap" rel="stylesheet">
+  <meta name="keywords" content="category theory">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  
+  
+<!--   <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css" integrity="sha384-zh0CIslj+VczCZtlzBcjt5ppRcsAmDnRem7ESsYwWwg3m/OaJ2l4x7YBZl9Kxxib" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js" integrity="sha384-Rma6DA2IPUwhNxmrB/7S3Tno0YY7sFu9WSYMCuulLhIqYSGZ2gKCJWIqhBWqMQfh" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+<script>
+  // Abstract toggle
+  // Runs after the whole document has parsed, so each <toggle-abstract>
+  // already has its text content when we read it.
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll("toggle-abstract").forEach(function(el) {
+      const body = el.innerHTML;
+      el.outerHTML = `<div class="entry-toggles"><details class="entry-details"><summary class="entry-details-toggle">Abstract</summary><div class="entry-details-body">${body}</div></details></div>`;
+    });
+  });
+</script>
+
+</head>
+
+<body>
+  <div class="header">
+    <h1>Atlantic Category Theory Seminar</h1>
+  </div>
+  <p>The ATCAT Seminar is a seminar on topics in category theory, running since 1973 by <a href="https://www.mathstat.dal.ca/~selinger/atcat/">the Atlantic Category Theory Group</a>.</p>
+    <ul class="list">
+      <li> <b>Regular time</b>: Tuesdays at 2:30 PM Atlantic time </li>
+      <li> <b>Location</b>: Chase Building, Room 319 </li>
+    </ul>
+  <p>
+    Virtual participation is available. Please <a href="mailto:hnasu@dal.ca">contact the organizer (Hayato Nasu)</a> to be added to the mailing list and receive the Zoom link.
+  </p>
+  <p>
+    Information about Winter 2026 seminars can be found 
+    <a href="https://ckrulewski.notion.site/Atlantic-Category-Theory-Seminar-2a91d9b184b980fdb03bd56916973210">here</a>.
+  </p>
+  
+  <h3>Fall 2026 schedule</h3>
+  <hr>
+  <p>
+    <ul class="list" style="list-style-type:none">  
+      <li>
+        <p><strong>September 15</strong></p>
+        <p><strong> Speaker:</strong>Robert Paré (Dalhousie University)</p>
+        <p>
+          <strong>Title:</strong> TBA
+        </p>
+        <toggle-abstract>
+          <p>TBA</p>
+        </toggle-abstract>
+      </li>
+
+
+    </ul>
+  </p>
+    
+
+    </details>
+</div>
+
+      </li>
+
+
+    </ul>
+  </p>
+    
+
+    <p>
+    <hr>
+    
+<!--     <div class="updated">
+      <p>
+	  Updated September 23, 2024.
+      </p>
+    </div> -->
+  </p>
+</body>

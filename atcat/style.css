@@ -92,6 +92,9 @@ a:visited {
 }
 
 .entry-details-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
     font-size: 0.8em;
     color: #2aa198;
     cursor: pointer;

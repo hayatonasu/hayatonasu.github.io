@@ -8,9 +8,9 @@
         <title>{{ page.title }} &middot; Hayato Nasu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
-        <link rel="stylesheet" href="{{ '/fonts/academicons-1.9.4/css/academicons.min.css' | relative_url }}"/>
+        <link rel="stylesheet" href="{{ '/assets/fonts/academicons-1.9.4/css/academicons.min.css' | relative_url }}"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link href="{{ '/style.css' | relative_url }}" rel="stylesheet" type="text/css" media="all">
+        <link href="{{ '/assets/css/style.css' | relative_url }}" rel="stylesheet" type="text/css" media="all">
 
         {% include math-head.html %}
     </head>
@@ -24,9 +24,9 @@
                 <div class="w3-container">
 
                     {% if is_ja %}
-                        <p><a href="{{ '/notejapanese.html' | relative_url }}">&larr; ノート一覧に戻る</a></p>
+                        <p><a href="{{ '/notejapanese/' | relative_url }}">&larr; ノート一覧に戻る</a></p>
                     {% else %}
-                        <p><a href="{{ '/others.html' | relative_url }}">&larr; Back to Others</a></p>
+                        <p><a href="{{ '/others/' | relative_url }}">&larr; Back to Others</a></p>
                     {% endif %}
 
                     <h1 style="color:#42602D;"><b>{{ page.title }}</b></h1>

@@ -4,22 +4,22 @@
         <meta charset="utf-8">
         <meta name="description" content="Hayato Nasu is a PhD student at Dalhousie University specializing in categorical logic, category theory, and type theory.">
         <title>Hayato Nasu's Homepage</title>
-        <script src="mathjax_setting.js" async></script>
+        <script src="assets/js/mathjax_setting.js" async></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
-        <link rel="stylesheet" href="fonts/academicons-1.9.4/css/academicons.min.css"/>
+        <link rel="stylesheet" href="assets/fonts/academicons-1.9.4/css/academicons.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link href="style.css" rel="stylesheet" type="text/css" media="all">
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css" media="all">
     </head>
     <body class="w3-light-grey">
 
     <nav class="site-nav">
         <div class="site-nav-tabs">
             <a href="index.html" class="site-nav-active">Home</a>
-            <a href="papers.html">Research Papers</a>
-            <a href="talks.html">Research Talks</a>
-            <a href="others.html">Others</a>
-            <a href="notejapanese.html">日本語ノート</a>
+            <a href="papers/">Research Papers</a>
+            <a href="talks/">Research Talks</a>
+            <a href="others/">Others</a>
+            <a href="notejapanese/">日本語ノート</a>
         </div>
     </nav>
 
@@ -28,7 +28,7 @@
             <div id="main" class="w3-white w3-row-padding w3-margin-top" style="margin-left:3%;">
                 <div class="w3-container">
 
-                    <img src="Images/IMG_3566.jpg" alt="Hayato Nasu" class="responsive">
+                    <img src="assets/images/IMG_3566.jpg" alt="Hayato Nasu" class="responsive">
 
                     <h1 style="color:#42602D;"><b>Hayato Nasu <br class="sp-only">奈須隼大</b></h1>
 
@@ -76,7 +76,7 @@ const iconMap = {
     "conference": '<i class="fa fa-chalkboard-user news-icon"></i>',
 };
 
-fetch("news.json")
+fetch("assets/data/news.json")
     .then(r => r.json())
     .then(items => {
         items = items.slice(0, 3);

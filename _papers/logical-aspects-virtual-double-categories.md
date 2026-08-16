@@ -6,7 +6,7 @@ type: thesis
 thesis_type: "Master's Thesis"
 venue: "Kyoto University"
 date: 2025-01-31
-pdf: /Papers/masterthesisupdated.pdf
+pdf: /pdfs/papers/masterthesisupdated.pdf
 arxiv: https://arxiv.org/abs/2501.17869
 bibtex: |
   @mastersthesis{nasu2025logical,
@@ -32,5 +32,5 @@ theory called FVDblTT that is designed as an internal language for
 virtual double categories.
 
 This is the version updated after the thesis defence (not every error
-is corrected). The [originally submitted version](/Papers/masterthesissubmitted.pdf)
+is corrected). The [originally submitted version](/pdfs/papers/masterthesissubmitted.pdf)
 is also available.

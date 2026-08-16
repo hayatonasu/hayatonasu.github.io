@@ -7,8 +7,8 @@ plugins:
 permalink: /blog/:year/:month/:day/:title/
 
 # Papers, talks, and notes are Jekyll collections (one file per item),
-# each with their own permalink, listed on papers.html/talks.html/
-# others.html/notejapanese.html.
+# each with their own permalink, listed on /papers/, /talks/, /others/,
+# and /notejapanese/.
 collections:
   papers:
     output: true
@@ -47,6 +47,8 @@ exclude:
   - package.json
   - README.md
 
-# Existing top-level HTML files (index.html, papers.html, talks.html, ...)
-# are plain static files with no front matter, so Jekyll serves them
-# as-is without any change to their content or URLs.
+# Existing top-level HTML files (index.html, dcr_intro.html, ...) are
+# plain static files with no front matter, so Jekyll serves them as-is
+# without any change to their content or URLs. papers/index.html,
+# talks/index.html, others/index.html, and notejapanese/index.html are
+# the exception — they carry front matter and are Liquid-rendered.

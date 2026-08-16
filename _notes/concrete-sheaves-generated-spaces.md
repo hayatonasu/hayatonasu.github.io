@@ -3,7 +3,7 @@ layout: note
 title: "Notes on concrete sheaves and generated spaces"
 date: 2026-04-23
 extra: "Version 0.1, personal notes"
-pdf: /Papers/concretesheaves.pdf
+pdf: /pdfs/papers/concretesheaves.pdf
 tags: [1-category, topology]
 standalone: false
 ---

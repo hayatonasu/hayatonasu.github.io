@@ -4,7 +4,7 @@ title: "On the decomposition of a strong epimorphism into regular epimorphisms"
 meeting_name: "ATCAT (December 2025)"
 place: "Halifax, Canada"
 date: 2025-12-02
-pdf: /Talks/atcat2025.pdf
+pdf: /pdfs/talks/atcat2025.pdf
 standalone: false
 paper: /papers/decomposition-strong-epimorphism/
 ---

@@ -3,7 +3,7 @@ layout: note
 title: "A note on SEAR"
 date: 2023-12-08
 extra: "Draft, under construction"
-pdf: /Papers/SEAR.pdf
+pdf: /pdfs/papers/SEAR.pdf
 tags: [categorical logic]
 standalone: false
 ---

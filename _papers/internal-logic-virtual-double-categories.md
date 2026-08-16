@@ -5,7 +5,7 @@ authors: ["Hayato Nasu"]
 type: preprint
 venue: "arXiv preprint"
 date: 2024-10-09
-pdf: /Papers/FVDblTT.pdf
+pdf: /pdfs/papers/FVDblTT.pdf
 arxiv: https://arxiv.org/abs/2410.06792
 tags: [double category, type theory]
 bibtex: |

@@ -4,7 +4,7 @@ title: "圏の内部等式論理"
 date: 2022-12-18
 extra: "2022 Category Theory Advent Calendar"
 link: https://adventar.org/calendars/7888
-pdf: /Papers/introinter.pdf
+pdf: /pdfs/papers/introinter.pdf
 tags: [categorical logic]
 standalone: false
 ---

@@ -4,7 +4,7 @@ title: "Terminals are Pointwise"
 date: 2024-12-17
 extra: "2024 Category Theory Advent Calendar"
 link: https://adventar.org/calendars/10265
-pdf: /Papers/pointwise.pdf
+pdf: /pdfs/papers/pointwise.pdf
 tags: [1-category]
 standalone: false
 ---

@@ -31,6 +31,6 @@ existing frameworks properly. On the syntactic side, we develop a type
 theory called FVDblTT that is designed as an internal language for
 virtual double categories.
 
-This is the version updated after the thesis defence (not every error
-is corrected). The [originally submitted version](/pdfs/papers/masterthesissubmitted.pdf)
-is also available.
+- [The updated version of the thesis](/pdfs/papers/masterthesisupdated.pdf) (the same pdf as the one linked above)
+- [The originally submitted version of the thesis](/pdfs/papers/masterthesissubmitted.pdf)
+- [The second half of the thesis is available as an independent paper](/papers/internal-logic-virtual-double-categories/)

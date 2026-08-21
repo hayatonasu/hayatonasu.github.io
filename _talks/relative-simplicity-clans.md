@@ -8,6 +8,7 @@ link: https://dariendewolf.com/fmcs2026/
 featured: true
 standalone: false
 paper: /papers/decomposition-strong-epimorphism/
+pdf: /pdfs/talks/FMCS2026.pdf
 ---
 
 Most categorical structures (categories, 2-categories, ...) resist

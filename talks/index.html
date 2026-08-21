@@ -10,7 +10,7 @@ permalink: /talks/
         <title>Hayato Nasu's Homepage / Talks</title>
         <script src="{{ '/assets/js/mathjax_setting.js' | relative_url }}" async></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+        <link rel="stylesheet" href="{{ '/assets/css/vendor/w3pro.css' | relative_url }}">
         <link rel="stylesheet" href="{{ '/assets/fonts/academicons-1.9.4/css/academicons.min.css' | relative_url }}"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <link href="{{ '/assets/css/style.css' | relative_url }}" rel="stylesheet" type="text/css" media="all">
@@ -49,7 +49,11 @@ permalink: /talks/
                         {% if talk.paper %}
                             {% assign related_paper = site.papers | where: "url", talk.paper | first %}
                             {% if related_paper %}
-                                <a href="{{ related_paper.url | relative_url }}" class="link-internal link-btn"><i class="fa fa-file-text"></i> Related paper</a>
+                                {% assign p_meta = related_paper.venue | default: "" %}
+                                {% if related_paper.thesis_type %}{% assign p_meta = p_meta | append: " — " | append: related_paper.thesis_type %}{% endif %}
+                                {% if related_paper.date %}{% if p_meta != "" %}{% assign p_meta = p_meta | append: ", " %}{% endif %}{% assign p_year = related_paper.date | date: "%Y" %}{% assign p_meta = p_meta | append: p_year %}{% endif %}
+                                {% assign p_excerpt = related_paper.excerpt | strip_html | normalize_whitespace | truncate: 200 %}
+                                <a href="{{ related_paper.url | relative_url }}" class="link-internal link-btn" data-preview-type="Paper" data-preview-title="{{ related_paper.title | escape }}" data-preview-meta="{{ p_meta | escape }}" data-preview-excerpt="{{ p_excerpt | escape }}"><i class="fa fa-file-text"></i> Related paper</a>
                             {% endif %}
                         {% endif %}
                     </div>
@@ -76,6 +80,8 @@ permalink: /talks/
     </div>
 
 {% include site-footer.html %}
+
+    <script src="{{ '/assets/js/link-preview.js' | relative_url }}" defer></script>
 
     <script>
 (function() {

@@ -264,3 +264,58 @@ p {font-family: "Helvetica Neue", sans-serif}
     color: #444;
     line-height: 1.5;
 }
+
+/* Hover/focus preview card for internal links (papers, talks, notes,
+   blog posts), populated by assets/js/link-preview.js. */
+#link-preview-card {
+    position: fixed;
+    z-index: 1000;
+    width: 300px;
+    max-width: calc(100vw - 24px);
+    background: #fff;
+    border: 1px solid #e0e8d8;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    padding: 0.9em 1em;
+    font-size: 0.85em;
+    line-height: 1.5;
+    color: #333;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+    pointer-events: none;
+}
+
+#link-preview-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+#link-preview-card .link-preview-type-tag {
+    display: inline-block;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #42602D;
+    background: #eef3e6;
+    padding: 0.1em 0.5em;
+    border-radius: 3px;
+    margin-bottom: 0.4em;
+}
+
+#link-preview-card .link-preview-title {
+    font-weight: bold;
+    color: #42602D;
+    margin-bottom: 0.3em;
+}
+
+#link-preview-card .link-preview-meta {
+    color: #777;
+    font-size: 0.85em;
+    margin-bottom: 0.5em;
+}
+
+#link-preview-card .link-preview-excerpt {
+    color: #333;
+}

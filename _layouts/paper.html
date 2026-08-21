@@ -5,7 +5,7 @@
         <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 | default: page.title }}">
         <title>{{ page.title }} &middot; Hayato Nasu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+        <link rel="stylesheet" href="{{ '/assets/css/vendor/w3pro.css' | relative_url }}">
         <link rel="stylesheet" href="{{ '/assets/fonts/academicons-1.9.4/css/academicons.min.css' | relative_url }}"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <link href="{{ '/assets/css/style.css' | relative_url }}" rel="stylesheet" type="text/css" media="all">
@@ -58,7 +58,7 @@
 
                     {% assign related_talks = site.talks | where: "paper", page.url %}
                     {% if related_talks.size > 0 %}
-                        <p style="margin-top:1.5em;"><strong style="color:#42602D;">Related talks:</strong> {% for t in related_talks %}{% assign t_slug = t.url | split: '/' | last %}<a href="{{ '/talks/' | relative_url }}#{{ t_slug }}">{{ t.meeting_name | default: t.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
+                        <p style="margin-top:1.5em;"><strong style="color:#42602D;">Related talks:</strong> {% for t in related_talks %}{% assign t_meta = t.meeting_name | default: "" %}{% if t.place %}{% assign t_meta = t_meta | append: ", " | append: t.place %}{% endif %}{% assign t_excerpt = t.excerpt | strip_html | normalize_whitespace | truncate: 200 %}{% if t.pdf %}<a href="{{ t.pdf | relative_url }}" rel="nofollow" data-preview-type="Talk" data-preview-title="{{ t.title | escape }}" data-preview-meta="{{ t_meta | escape }}" data-preview-excerpt="{{ t_excerpt | escape }}">{{ t.meeting_name | default: t.title }}</a>{% else %}<a href="{{ t.url | relative_url }}" data-preview-type="Talk" data-preview-title="{{ t.title | escape }}" data-preview-meta="{{ t_meta | escape }}" data-preview-excerpt="{{ t_excerpt | escape }}">{{ t.meeting_name | default: t.title }}</a>{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
                     {% endif %}
 
                 </div>
@@ -67,6 +67,8 @@
     </div>
 
 {% include site-footer.html %}
+
+    <script src="{{ '/assets/js/link-preview.js' | relative_url }}" defer></script>
 
     <script>
 {% if page.bibtex %}

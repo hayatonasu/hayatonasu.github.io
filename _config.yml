@@ -1,3 +1,5 @@
+url: "https://hayatonasu.github.io"
+
 plugins:
   - jekyll-sitemap
 
@@ -5,6 +7,17 @@ plugins:
 # with the existing top-level .html pages, which Jekyll passes through
 # untouched (they are not covered by any Jekyll convention).
 permalink: /blog/:year/:month/:day/:title/
+
+# Blog posts and the /blog/ index are kept out of sitemap.xml on request.
+defaults:
+  - scope:
+      path: "_posts"
+    values:
+      sitemap: false
+  - scope:
+      path: "blog/index.html"
+    values:
+      sitemap: false
 
 # Papers, talks, and notes are Jekyll collections (one file per item),
 # each with their own permalink, listed on /papers/, /talks/, /others/,

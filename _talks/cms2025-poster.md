@@ -2,7 +2,7 @@
 layout: talk
 title: "Double categories of relations relative to factorization systems (poster)"
 meeting_name: "CMS Summer Meeting 2025"
-place: "Ottawa"
+place: "Quebec"
 date: 2025-06-09
 pdf: /pdfs/talks/cmssum2025pos.pdf
 standalone: false

@@ -8,5 +8,10 @@
     "date": "2026.07",
     "icon": "school",
     "body": "I took part in <a href=\"https://adjointschool.com/2026.html\" class=\"link-external\">the Adjoint School 2026</a> on the topic of <b>\"A Double Category Theoretic Perspective on Partiality\"</b>."
+  },
+  {
+    "date": "2026 Fall",
+    "icon": "reading-group",
+    "body": "Started <a href =\"https://weak-equivalent.github.io/seminars/synthetic/index.html\" class=\"link-external\"> a reading group on (s)HoTT </a> (organized with <a href =\"https://weak-equivalent.github.io\" class=\"link-external\">Daniel</a>.)"
   }
 ]

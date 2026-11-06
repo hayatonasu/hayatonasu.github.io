@@ -1,18 +1,42 @@
 # hayatonasu.github.io
 
 Personal site. Served by GitHub Pages' built-in Jekyll build (no
-`.nojekyll`). `index.html` has no front matter, so Jekyll passes it
-through unchanged. `papers/index.html`, `talks/index.html`,
-`others/index.html`, and `notejapanese/index.html` are the exception —
-they do have front matter and are Liquid-rendered, listing the
-`_papers/`/`_talks/`/`_notes/`/`_notes_ja/` collections, and are served
-at the clean folder URLs `/papers/`, `/talks/`, `/others/`, and
-`/notejapanese/`.
+`.nojekyll`), deployed from the `public` branch.
+
+## Where to edit what
+
+| To change...                          | Edit...                             | URL                    |
+| ------------------------------------- | ----------------------------------- | ---------------------- |
+| Homepage                              | `index.html`                        | `/`                    |
+| Homepage news feed                    | `assets/data/news.json`             | `/`                    |
+| A paper                               | `content/_papers/`                  | `/papers/<name>/`      |
+| A talk                                | `content/_talks/`                   | `/talks/<name>/`       |
+| A note (English)                      | `content/_notes/`                   | `/notes/<name>/`       |
+| A note (Japanese)                     | `content/_notes_ja/`                | `/notes-ja/<name>/`    |
+| A blog post                           | `content/_posts/`                   | `/blog/YYYY/MM/DD/<name>/` |
+| A listing page (Papers, Talks, ...)   | `pages/`                            | `/papers/`, `/talks/`, `/others/`, `/notejapanese/`, `/blog/` |
+| Atlantic Category Theory seminar      | `atcat/index.html`                  | `/atcat/`              |
+| Navigation bar, footer, math setup    | `_includes/`                        | every page             |
+| Template of a paper/talk/note/post    | `_layouts/`                         | every item of that kind |
+| Styles and scripts                    | `assets/css/style.css`, `assets/js/` | every page            |
+| Math macros                           | `blog/preamble.sty`                 | every page with math   |
+| A PDF                                 | `pdfs/papers/`, `pdfs/talks/`       | `/pdfs/...`            |
+| Blog images                           | `blog/images/`                      | `/blog/images/...`     |
+
+Files in `content/` and `pages/` get their URL from `_config.yml` or
+their front matter, so they can be renamed or moved without affecting
+the site's structure. Everything else (`assets/`, `pdfs/`, `atcat/`,
+`blog/`) is copied as is, so its folder path *is* its public URL: moving
+those files breaks existing links.
+
+`index.html` has no front matter, so Jekyll passes it through unchanged.
+The pages in `pages/` do have front matter and are Liquid-rendered,
+listing the collections in `content/`.
 
 Shared static assets (stylesheet, JS, fonts, images, the homepage's
 news feed data) live under `assets/`. PDFs are kept separate, under
 `pdfs/papers/` and `pdfs/talks/` — one file per paper/talk, referenced
-by `pdf:` in the matching `_papers/`/`_talks/` entry.
+by `pdf:` in the matching `content/_papers/` or `content/_talks/` entry.
 
 For local preview, `Gemfile` pins the same `github-pages` gem GitHub
 Pages itself builds with:
@@ -24,7 +48,7 @@ bundle exec jekyll serve --livereload
 
 ## Writing a blog post
 
-Add a Markdown file to `_posts/`, named `YYYY-MM-DD-slug.md`, with
+Add a Markdown file to `content/_posts/`, named `YYYY-MM-DD-slug.md`, with
 front matter:
 
 ```yaml
@@ -48,14 +72,10 @@ as a prefix (e.g. `hello-world-diagram.png`) to avoid collisions
 between posts, and reference them with an absolute path:
 `![alt text](/blog/images/hello-world-diagram.png)`.
 
-This layout is meant to match what the Obsidian Enveloppe plugin
-produces by default (wikilinks converted to Markdown links, images
-uploaded and rewritten), so posts written there should need no manual
-adjustment before or after push.
-
 ## Adding a paper
 
-Add a Markdown file to `_papers/`, e.g. `_papers/my-paper.md`:
+Add a Markdown file to `content/_papers/`, e.g.
+`content/_papers/my-paper.md`:
 
 ```yaml
 ---
@@ -95,7 +115,8 @@ indexed by search engines either.
 
 ## Adding a talk
 
-Add a Markdown file to `_talks/`, e.g. `_talks/my-talk.md`:
+Add a Markdown file to `content/_talks/`, e.g.
+`content/_talks/my-talk.md`:
 
 ```yaml
 ---
@@ -119,8 +140,8 @@ papers (title links to `link`/`pdf` instead of the item's own page).
 
 ## Adding a note (Others / 日本語ノート)
 
-Add a Markdown file to `_notes/` (English, listed on `/others/`) or
-`_notes_ja/` (Japanese, listed on `/notejapanese/`) — both share the
+Add a Markdown file to `content/_notes/` (English, listed on `/others/`)
+or `content/_notes_ja/` (Japanese, listed on `/notejapanese/`) — both share the
 same `note` layout and front-matter schema:
 
 ```yaml
@@ -146,7 +167,7 @@ paper" above for what that does and doesn't skip.
 
 ## Math macros (`blog/preamble.sty`)
 
-Blog posts, papers, talks, and notes all load `blog/preamble.sty` (the
-same `\newcommand` macro file used in Obsidian) automatically, so macros like
+Blog posts, papers, talks, and notes all load `blog/preamble.sty` (a
+`\newcommand` macro file) automatically, so macros like
 `\Set` or `\Catone` work everywhere without re-declaring them per file.
 Edit that one file to add/change macros site-wide.

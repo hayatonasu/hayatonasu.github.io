@@ -15,13 +15,15 @@ defaults:
     values:
       sitemap: false
   - scope:
-      path: "blog/index.html"
+      path: "pages/blog.html"
     values:
       sitemap: false
 
-# Papers, talks, and notes are Jekyll collections (one file per item),
-# each with their own permalink, listed on /papers/, /talks/, /others/,
-# and /notejapanese/.
+# Papers, talks, notes, and blog posts all live under content/ (one file
+# per item). Papers, talks, and notes are collections with their own
+# permalinks, listed by the pages in pages/ at /papers/, /talks/,
+# /others/, and /notejapanese/.
+collections_dir: content
 collections:
   papers:
     output: true
@@ -36,7 +38,7 @@ collections:
     output: true
     permalink: /notes-ja/:path/
 
-# Only _posts/ is turned into blog content; everything else on the site
+# Only content/_posts/ is turned into blog content; everything else on the site
 # stays exactly as it is on disk.
 markdown: kramdown
 kramdown:
@@ -57,11 +59,10 @@ exclude:
   - vendor         # local `bundle install` gems, only present for local `jekyll serve`
   - Gemfile
   - Gemfile.lock
-  - package.json
   - README.md
 
 # Existing top-level HTML files (index.html, dcr_intro.html, ...) are
 # plain static files with no front matter, so Jekyll serves them as-is
-# without any change to their content or URLs. papers/index.html,
-# talks/index.html, others/index.html, and notejapanese/index.html are
-# the exception — they carry front matter and are Liquid-rendered.
+# without any change to their content or URLs. The listing pages in
+# pages/ are the exception — they carry front matter (including the
+# permalink that sets their URL) and are Liquid-rendered.

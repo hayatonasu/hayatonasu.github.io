@@ -1,0 +1,45 @@
+---
+layout: null
+permalink: /news/
+---
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="News and updates from Hayato Nasu.">
+        <title>Hayato Nasu's Homepage / News</title>
+        <script src="{{ '/assets/js/mathjax_setting.js' | relative_url }}" async></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ '/assets/css/vendor/w3pro.css' | relative_url }}">
+        <link href="{{ '/assets/css/style.css' | relative_url }}" rel="stylesheet" type="text/css" media="all">
+        <style>
+            .news-list-item { display: flex; gap: 1.5em; padding: 0.5em 0; line-height: 1.6; }
+            .news-list-date { flex: 0 0 8em; color: #777; }
+            @media (max-width: 600px) {
+                .news-list-item { display: block; }
+            }
+        </style>
+    </head>
+    <body class="w3-light-grey">
+
+    {% include site-nav.html %}
+
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+        <div class="w3-container">
+            <div id="main" class="w3-white w3-row-padding w3-margin-top" style="margin-left:3%;">
+
+        <h2 class="w3-large"><b>News / Updates</b></h2>
+
+        <div id="news-container"></div>
+
+            </div>
+        </div>
+    </div>
+
+{% include site-footer.html %}
+
+    <script src="{{ '/assets/js/news.js' | relative_url }}"></script>
+    <script>renderNewsList("{{ '/assets/data/news.json' | relative_url }}");</script>
+
+    </body>
+</html>

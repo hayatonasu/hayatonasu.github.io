@@ -8,13 +8,13 @@ Personal site. Served by GitHub Pages' built-in Jekyll build (no
 | To change...                          | Edit...                             | URL                    |
 | ------------------------------------- | ----------------------------------- | ---------------------- |
 | Homepage                              | `index.html`                        | `/`                    |
-| Homepage news feed                    | `assets/data/news.json`             | `/`                    |
+| News (homepage and full list)         | `assets/data/news.json`             | `/`, `/news/`          |
 | A paper                               | `content/_papers/`                  | `/papers/<name>/`      |
 | A talk                                | `content/_talks/`                   | `/talks/<name>/`       |
 | A note (English)                      | `content/_notes/`                   | `/notes/<name>/`       |
 | A note (Japanese)                     | `content/_notes_ja/`                | `/notes-ja/<name>/`    |
 | A blog post                           | `content/_posts/`                   | `/blog/YYYY/MM/DD/<name>/` |
-| A listing page (Papers, Talks, ...)   | `pages/`                            | `/papers/`, `/talks/`, `/others/`, `/notejapanese/`, `/blog/` |
+| A listing page (Papers, Talks, ...)   | `pages/`                            | `/papers/`, `/talks/`, `/others/`, `/notejapanese/`, `/news/`, `/blog/` |
 | Atlantic Category Theory seminar      | `atcat/index.html`                  | `/atcat/`              |
 | Navigation bar, footer, math setup    | `_includes/`                        | every page             |
 | Template of a paper/talk/note/post    | `_layouts/`                         | every item of that kind |
@@ -45,6 +45,12 @@ Pages itself builds with:
 bundle install
 bundle exec jekyll serve --livereload
 ```
+
+## Adding news
+
+Add an entry to the bottom of `assets/data/news.json` (it's ordered oldest
+to newest). The homepage shows the latest three, newest first, and `/news/`
+shows all of them. The `icon` names are defined in `assets/js/news.js`.
 
 ## Writing a blog post
 

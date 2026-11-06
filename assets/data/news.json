@@ -13,5 +13,10 @@
     "date": "2026 Fall",
     "icon": "reading-group",
     "body": "Started <a href =\"https://weak-equivalent.github.io/seminars/synthetic/index.html\" class=\"link-external\"> a reading group on (s)HoTT </a> (coorganized with <a href =\"https://weak-equivalent.github.io\" class=\"link-external\">Daniel</a>.)"
+  },
+  {
+    "date": "2026 Nov 10th",
+    "icon": "talk",
+    "body": "Talk on my preprint \"Virtual double categories of relations relative to fibrations\" at <a href = \"https://bryceclarke.github.io/virtual-double-categories-workshop/index.html\" class=\"link-external\"> Third Virtual Workshop on Double Categories </a>" 
   }
 ]

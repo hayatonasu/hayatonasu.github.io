@@ -49,7 +49,7 @@
                         <li>Type theory</li>
                     </ul>
 
-                    <h2 class="w3-large"><b><i class="fa fa-newspaper fa-fw w3-margin-right" style="color:#42602D;"></i>News / Updates</b></h2>
+                    <h2 class="w3-large"><b><i class="fa fa-newspaper fa-fw w3-margin-right" style="color:#42602D;"></i>News / Updates</b><a href="news/" class="link-external" style="margin-left:1em; font-size:0.8em; white-space:nowrap;">All news &rarr;</a></h2>
 
                     <div id="news-container"></div>
 
@@ -64,34 +64,8 @@
     <span class="site-footer-copy">&copy; Hayato Nasu</span>
 </footer>
 
-    <script>
-const iconMap = {
-    "arxiv": '<i class="ai ai-arxiv news-icon"></i>',
-    "graduation-cap": '<i class="fa fa-graduation-cap news-icon"></i>',
-    "file": '<i class="fa fa-file-text news-icon"></i>',
-    "globe": '<i class="fa fa-globe news-icon"></i>',
-    "star": '<i class="fa fa-star news-icon"></i>',
-    "school": '<i class="fa fa-school news-icon"></i>',
-    "document": '<i class="fa fa-file-lines news-icon"></i>',
-    "conference": '<i class="fa fa-chalkboard-user news-icon"></i>',
-    "reading-group": '<i class="fa fa-book-open-reader news-icon"></i>',
-};
-
-fetch("assets/data/news.json")
-    .then(r => r.json())
-    .then(items => {
-        items = items.slice(0, 3);
-        const container = document.getElementById("news-container");
-        container.innerHTML = items.map(item => `
-            <div class="news-item">
-                <div class="news-meta">
-                    ${iconMap[item.icon] || '<i class="fa fa-circle news-icon"></i>'}
-                    <span class="news-date">${item.date}</span>
-                </div>
-                <div class="news-body">${item.body}</div>
-            </div>`).join("");
-    });
-    </script>
+    <script src="assets/js/news.js"></script>
+    <script>renderNews("assets/data/news.json", 3);</script>
 
     </body>
 </html>

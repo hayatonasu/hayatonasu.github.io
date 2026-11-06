@@ -1,5 +1,9 @@
 url: "https://hayatonasu.github.io"
 
+# Turn off GitHub Pages' default theme (Primer). It generates its own
+# assets/css/style.css, which overwrites ours during `jekyll serve` rebuilds.
+theme: null
+
 plugins:
   - jekyll-sitemap
 

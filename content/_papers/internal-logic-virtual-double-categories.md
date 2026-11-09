@@ -7,7 +7,7 @@ venue: "arXiv preprint"
 date: 2024-10-09
 pdf: /pdfs/papers/FVDblTT.pdf
 arxiv: https://arxiv.org/abs/2410.06792
-tags: [double category, type theory]
+tags: [double category, type theory, categorical logic]
 bibtex: |
   @article{nasu2024internal,
     author = {Nasu, Hayato},

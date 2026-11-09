@@ -7,7 +7,6 @@ thesis_type: "Master's Thesis"
 venue: "Kyoto University"
 date: 2025-01-31
 pdf: /pdfs/papers/masterthesisupdated.pdf
-arxiv: https://arxiv.org/abs/2501.17869
 bibtex: |
   @mastersthesis{nasu2025logical,
     author = {Nasu, Hayato},
@@ -25,12 +24,12 @@ significant principle of categorical logic is bringing together the
 semantics and the syntax of logical systems in a common categorical
 framework. This thesis is intended to propose a double-categorical
 method for categorical logic in line with this principle. On the
-semantic side, we investigate virtual double categories as a model of
-predicate logic and illustrate that this framework subsumes the
+semantic side, we investigate virtual double categories as a model of predicate logic and illustrate that this framework subsumes the
 existing frameworks properly. On the syntactic side, we develop a type
 theory called FVDblTT that is designed as an internal language for
 virtual double categories.
 
 - [The updated version of the thesis](/pdfs/papers/masterthesisupdated.pdf) (the same pdf as the one linked above)
 - [The originally submitted version of the thesis](/pdfs/papers/masterthesissubmitted.pdf)
-- [The second half of the thesis is available as an independent paper](/papers/internal-logic-virtual-double-categories/)
+- [Chapter 2 of the thesis is available as an independent paper](/papers/virtual-double-categories-of-relations/)
+- [Chapter 3 of the thesis is available as an independent paper](/papers/internal-logic-virtual-double-categories/)

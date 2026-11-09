@@ -2,9 +2,25 @@
     "version": "2.0.0",
     "tasks": [
         {
+            // Ctrl+Shift+B: start the local server (if it isn't running
+            // yet) and open the homepage in the Windows default browser.
+            "label": "Preview site",
+            "type": "shell",
+            "command": "explorer.exe http://127.0.0.1:4000/ || true",
+            "dependsOn": "jekyll serve",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "jekyll serve",
             "type": "shell",
-            "command": "export PATH=\"$HOME/.local/share/gem/ruby/3.2.0/bin:$PATH\"; bundle exec jekyll serve --host 127.0.0.1 --port 4000 --livereload",
+            "command": "if lsof -ti:4000 -sTCP:LISTEN >/dev/null; then echo 'Server running... (already started)'; else export PATH=\"$HOME/.local/share/gem/ruby/3.2.0/bin:$PATH\"; bundle exec jekyll serve --host 127.0.0.1 --port 4000 --livereload; fi",
             "isBackground": true,
             "problemMatcher": {
                 "pattern": {
@@ -21,10 +37,7 @@
                 "reveal": "always",
                 "panel": "dedicated"
             },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "group": "build"
         }
     ]
 }

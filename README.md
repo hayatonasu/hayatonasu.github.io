@@ -129,6 +129,7 @@ Add a Markdown file to `content/_talks/`, e.g.
 layout: talk
 title: "Talk Title"
 meeting_name: "Category Theory 2025"
+meeting_url: https://example.org/ct2025/   # optional; links the meeting name
 place: "Somewhere"
 date: YYYY-MM-DD
 link: https://youtube.com/...   # optional, YouTube links get their own icon

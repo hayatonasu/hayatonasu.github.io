@@ -3,7 +3,7 @@ layout: talk
 title: "Cartesian bicategories and cartesian equipments: Categorical Logic Meets Double Categories — Side B"
 meeting_name: "CSCAT 2025"
 date: 2025-03-11
-link: https://hisashi-aratake.gitlab.io/event/cscat2025
+meeting_url: https://hisashi-aratake.gitlab.io/event/cscat2025
 pdf: /pdfs/talks/CSCAT2025.pdf
 featured: true
 standalone: false

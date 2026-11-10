@@ -43,7 +43,7 @@ permalink: /talks/
                         <h3 class="entry-title"><a href="{{ talk.url | relative_url }}">{{ talk.title }}</a></h3>
                     {% endif %}
                     <div class="entry-subline">
-                        {% if talk.meeting_name %}{{ talk.meeting_name }}{% endif %}
+                        {% if talk.meeting_name %}{% if talk.meeting_url %}<a href="{{ talk.meeting_url }}" target="_blank" rel="noopener noreferrer" class="link-external">{{ talk.meeting_name }}</a>{% else %}{{ talk.meeting_name }}{% endif %}{% endif %}
                         {% if talk.pdf %}<a href="{{ talk.pdf | relative_url }}" rel="nofollow" class="w3-button w3-green w3-round-large w3-small entry-pdf-btn"><i class="fa fa-download"></i> PDF</a>{% endif %}
                         {% if talk.link %}<a href="{{ talk.link }}" target="_blank" rel="noopener noreferrer" class="link-external link-btn">{% if talk.link contains "youtube.com" or talk.link contains "youtu.be" %}<i class="fa-brands fa-youtube"></i> YouTube{% else %}<i class="fa fa-link"></i> Link{% endif %}</a>{% endif %}
                         {% if talk.paper %}

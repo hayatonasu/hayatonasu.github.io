@@ -2,6 +2,7 @@
 layout: talk
 title: "On the decomposition of a strong epimorphism into regular epimorphisms"
 meeting_name: "ATCAT (December 2025)"
+meeting_url: https://ckrulewski.notion.site/Atlantic-Category-Theory-Seminar-2a91d9b184b980fdb03bd56916973210#2a91d9b184b9800a9a5ed2d58baf3438
 place: "Halifax, Canada"
 date: 2025-12-02
 pdf: /pdfs/talks/atcat2025.pdf

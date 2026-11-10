@@ -26,7 +26,7 @@
                     <h1 style="color:#42602D;"><b>{{ page.title }}</b></h1>
 
                     <div class="entry-meta">
-                        {% if page.meeting_name %}{{ page.meeting_name }}{% endif %}
+                        {% if page.meeting_name %}{% if page.meeting_url %}<a href="{{ page.meeting_url }}" target="_blank" rel="noopener noreferrer" class="link-external">{{ page.meeting_name }}</a>{% else %}{{ page.meeting_name }}{% endif %}{% endif %}
                     </div>
 
                     <p>

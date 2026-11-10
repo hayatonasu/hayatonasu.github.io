@@ -2,6 +2,7 @@
 layout: talk
 title: "Enriched categories in a virtual double category"
 meeting_name: "ATCAT (October 2026)"
+meeting_url: https://hayatonasu.github.io/atcat/
 place: "Halifax, Canada"
 date: 2026-10-06
 featured: true

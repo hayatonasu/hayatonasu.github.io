@@ -5,7 +5,6 @@ meeting_name: "ATCAT (October 2026)"
 meeting_url: https://hayatonasu.github.io/atcat/
 place: "Halifax, Canada"
 date: 2026-10-06
-featured: true
 pdf: /pdfs/talks/atcat2026.pdf
 standalone: false
 ---

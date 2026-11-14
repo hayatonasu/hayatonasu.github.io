@@ -1,0 +1,10 @@
+# Talks shown by default on /talks/. Everything else is hidden behind the
+# "Show all talks" toggle. Each entry is a talk's file name in
+# content/_talks/ without the .md extension (= its /talks/<slug>/ URL).
+# Order here doesn't matter — the page is always sorted by date.
+- vwdc2026
+- cms2026
+- atcat2026
+- relative-simplicity-clans
+- dcr-ct2024
+- anticolimits-cscs2024

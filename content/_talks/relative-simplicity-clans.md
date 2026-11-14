@@ -5,7 +5,6 @@ meeting_name: "FMCS 2026"
 place: "Antigonish, Nova Scotia"
 date: 2026-06-16
 meeting_url: https://dariendewolf.com/fmcs2026/
-featured: true
 standalone: false
 paper: /papers/decomposition-strong-epimorphism/
 pdf: /pdfs/talks/FMCS2026.pdf

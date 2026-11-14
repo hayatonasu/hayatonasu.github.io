@@ -5,7 +5,6 @@ meeting_name: "CSCAT 2025"
 date: 2025-03-11
 meeting_url: https://hisashi-aratake.gitlab.io/event/cscat2025
 pdf: /pdfs/talks/CSCAT2025.pdf
-featured: true
 standalone: false
 paper: /papers/logical-aspects-virtual-double-categories/
 ---

@@ -11,6 +11,7 @@ Personal site. Served by GitHub Pages' built-in Jekyll build (no
 | News (homepage and full list)         | `assets/data/news.json`             | `/`, `/news/`          |
 | A paper                               | `content/_papers/`                  | `/papers/<name>/`      |
 | A talk                                | `content/_talks/`                   | `/talks/<name>/`       |
+| Which talks `/talks/` shows by default | `_data/featured_talks.yml`         | `/talks/`              |
 | A note (English)                      | `content/_notes/`                   | `/notes/<name>/`       |
 | A note (Japanese)                     | `content/_notes_ja/`                | `/notes-ja/<name>/`    |
 | A blog post                           | `content/_posts/`                   | `/blog/YYYY/MM/DD/<name>/` |
@@ -134,8 +135,6 @@ place: "Somewhere"
 date: YYYY-MM-DD
 link: https://youtube.com/...   # optional, YouTube links get their own icon
 pdf: /pdfs/talks/my-talk.pdf         # optional slides, existing pdfs/talks/ dir
-featured: true                  # optional; non-featured talks are hidden
-                                 # behind a "Show all talks" toggle on /talks/
 tags: [double-categories]
 ---
 Optional abstract in Markdown — shown on both the talk's own page and,

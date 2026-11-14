@@ -12,11 +12,11 @@
   {
     "date": "2026 Fall",
     "icon": "reading-group",
-    "body": "Started <a href =\"https://weak-equivalent.github.io/seminars/synthetic/index.html\" class=\"link-external\"> a reading group on (s)HoTT </a> (coorganized with <a href =\"https://weak-equivalent.github.io\" class=\"link-external\">Daniel</a>.)"
+    "body": "Started <a href =\"https://weak-equivalent.github.io/seminars/synthetic/index.html\" class=\"link-external\"> a reading group on (s)HoTT </a> (coorganized with <a href =\"https://hayatonasu.github.io/readinggroup_simplicialhott/\" class=\"link-external\">Daniel</a>.)"
   },
   {
     "date": "2026 Nov 10th",
     "icon": "talk",
-    "body": "<a href=\"/talks/vwdc2026/\">Talk </a> on my preprint <a href=\"/papers/virtual-double-categories-of-relations/\"> \"Virtual double categories of relations relative to fibrations\"</a> at <a href = \"https://bryceclarke.github.io/virtual-double-categories-workshop/index.html\" class=\"link-external\"> Third Virtual Workshop on Double Categories </a>" 
+    "body": "<a href=\"/talks/vwdc2026/\">Talk </a> on my preprint <a href=\"/papers/virtual-double-categories-of-relations/\"> \"Virtual double categories of relations relative to fibrations\"</a> at <a href = \"https://bryceclarke.github.io/virtual-double-categories-workshop/index.html\" class=\"link-external\"> Third Virtual Workshop on Double Categories </a>. The recording is available <a href=\"https://youtu.be/h0DpTEvd9E8\" class=\"link-external\">here</a>."
   }
 ]
